@@ -24,20 +24,20 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
       // Ring collapses into center
       const t = setTimeout(() => {
         setPhase('shrinking');
-      }, 1500);
+      }, 1800);
       return () => clearTimeout(t);
     }
     
     if (phase === 'shrinking') {
-      // Sphere shrinks for 1s
+      // Sphere shrinks and turns white
       const t = setTimeout(() => {
         setPhase('turning_white');
-      }, 1000);
+      }, 1200);
       return () => clearTimeout(t);
     }
 
     if (phase === 'turning_white') {
-      // Color shifts from black -> white
+      // Stays small and pure white to build anticipation
       const t = setTimeout(() => {
         setPhase('exploding');
       }, 600);
@@ -78,21 +78,22 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
   }
 
   if (phase === 'imploding') {
-    pullSpeed = 4.5; // Beautiful spiraling pull speed to collapse the ring
-    coreRadiusScale = 0.65; // The sphere shrinks a bit simultaneously
-    ringOpacity = 1.0; // Keep the collapsing ring visible as it sucks in
+    pullSpeed = 16.0; // Strong spiraling pull to completely swallow the ring
+    coreRadiusScale = 1.0; // The sphere remains full size while swallowing
+    ringOpacity = 1.0; // Keep the collapsing ring fully visible
   }
 
   if (phase === 'shrinking') {
-    pullSpeed = 4.5;
-    ringOpacity = 0; // Fade out remaining outer particles
-    coreRadiusScale = 0.25; // Shrink the core even smaller
+    pullSpeed = 16.0;
+    ringOpacity = 0; // Fade out remaining stray dust
+    coreRadiusScale = 0.20; // Shrink the core down to a small dense point
+    coreColorOverride = "#ffffff"; // Turns white as it compresses
   }
 
   if (phase === 'turning_white') {
     ringOpacity = 0;
-    coreRadiusScale = 0.25; // Stays small
-    coreColorOverride = "#ffffff"; // Turns white
+    coreRadiusScale = 0.20; // Stays small and dense
+    coreColorOverride = "#ffffff"; // White point of energy
   }
 
   if (phase === 'exploding' || phase === 'fading_out') {

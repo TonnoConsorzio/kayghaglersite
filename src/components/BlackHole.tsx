@@ -432,13 +432,16 @@ export default function BlackHole(props: Props) {
                 }
                 
                 const targetColorRgb = hexToRgb(activeColor);
+                const isWhite = activeColor === "#ffffff";
+
                 if (!colorInitialized.current) {
                     currentColorRef.current = { ...targetColorRgb };
                     colorInitialized.current = true;
                 } else {
-                    currentColorRef.current.r += (targetColorRgb.r - currentColorRef.current.r) * 0.15 * dt;
-                    currentColorRef.current.g += (targetColorRgb.g - currentColorRef.current.g) * 0.15 * dt;
-                    currentColorRef.current.b += (targetColorRgb.b - currentColorRef.current.b) * 0.15 * dt;
+                    const speed = isWhite ? 0.3 * dt : 0.15 * dt;
+                    currentColorRef.current.r += (targetColorRgb.r - currentColorRef.current.r) * speed;
+                    currentColorRef.current.g += (targetColorRgb.g - currentColorRef.current.g) * speed;
+                    currentColorRef.current.b += (targetColorRgb.b - currentColorRef.current.b) * speed;
                 }
                 
                 const voidRgb = {
@@ -448,60 +451,111 @@ export default function BlackHole(props: Props) {
                 };
 
                 const targetScale = dynamicPropsRef.current.coreRadiusScale ?? 1;
-                currentCoreRadiusScale.current += (targetScale - currentCoreRadiusScale.current) * 0.15 * dt;
+                
+                if (targetScale > 5) {
+                    // It's exploding! Use a fast, smooth, exponential growth that takes about 12 frames (200ms) to cover the screen.
+                    const speed = 0.6 * (currentCoreRadiusScale.current + 0.15) * dt;
+                    currentCoreRadiusScale.current = Math.min(targetScale, currentCoreRadiusScale.current + speed);
+                } else {
+                    currentCoreRadiusScale.current += (targetScale - currentCoreRadiusScale.current) * 0.15 * dt;
+                }
+                
                 const drawRadius = voidRadius * currentCoreRadiusScale.current;
 
-                const sphereGrad = ctx.createRadialGradient(
-                    voidCx - drawRadius * 0.25,
-                    voidCy - drawRadius * 0.3,
-                    drawRadius * 0.05,
-                    voidCx,
-                    voidCy,
-                    drawRadius
-                )
-                const edgeR = Math.min(255, voidRgb.r + 18)
-                const edgeG = Math.min(255, voidRgb.g + 18)
-                const edgeB = Math.min(255, voidRgb.b + 18)
-                sphereGrad.addColorStop(
-                    0,
-                    `rgba(${Math.min(255, voidRgb.r + 8)}, ${Math.min(255, voidRgb.g + 8)}, ${Math.min(255, voidRgb.b + 8)}, 1)`
-                )
-                sphereGrad.addColorStop(
-                    0.65,
-                    `rgba(${voidRgb.r}, ${voidRgb.g}, ${voidRgb.b}, 1)`
-                )
-                sphereGrad.addColorStop(
-                    0.92,
-                    `rgba(${edgeR}, ${edgeG}, ${edgeB}, 1)`
-                )
-                sphereGrad.addColorStop(
-                    1,
-                    `rgba(${edgeR}, ${edgeG}, ${edgeB}, 0.9)`
-                )
+                if (isWhite) {
+                    // Render a pure white sphere with NO dark/gray contours or artifacts.
+                    const sphereGrad = ctx.createRadialGradient(
+                        voidCx - drawRadius * 0.25,
+                        voidCy - drawRadius * 0.3,
+                        drawRadius * 0.05,
+                        voidCx,
+                        voidCy,
+                        drawRadius
+                    );
+                    const alpha = Math.min(1.0, currentColorRef.current.r / 255);
+                    sphereGrad.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+                    sphereGrad.addColorStop(0.65, `rgba(255, 255, 255, ${alpha})`);
+                    sphereGrad.addColorStop(1, `rgba(255, 255, 255, ${alpha * 0.95})`);
 
-                ctx.globalAlpha = 1.0
-                ctx.fillStyle = sphereGrad
-                ctx.beginPath()
-                ctx.arc(voidCx, voidCy, drawRadius, 0, Math.PI * 2)
-                ctx.fill()
+                    ctx.globalAlpha = 1.0;
+                    ctx.fillStyle = sphereGrad;
+                    ctx.beginPath();
+                    ctx.arc(voidCx, voidCy, drawRadius, 0, Math.PI * 2);
+                    ctx.fill();
 
-                const rimGrad = ctx.createRadialGradient(
-                    voidCx,
-                    voidCy,
-                    drawRadius * 0.88,
-                    voidCx,
-                    voidCy,
-                    drawRadius * 1.02
-                )
-                rimGrad.addColorStop(0, `rgba(255, 255, 255, 0)`)
-                rimGrad.addColorStop(0.6, `rgba(180, 180, 200, 0.06)`)
-                rimGrad.addColorStop(0.85, `rgba(180, 180, 200, 0.12)`)
-                rimGrad.addColorStop(1, `rgba(180, 180, 200, 0)`)
-                ctx.globalAlpha = 1.0
-                ctx.fillStyle = rimGrad
-                ctx.beginPath()
-                ctx.arc(voidCx, voidCy, drawRadius * 1.02, 0, Math.PI * 2)
-                ctx.fill()
+                    // Only draw a white rim if it's not expanding massively (not exploding) to keep it perfectly clean
+                    if (targetScale < 5) {
+                        const rimGrad = ctx.createRadialGradient(
+                            voidCx,
+                            voidCy,
+                            drawRadius * 0.88,
+                            voidCx,
+                            voidCy,
+                            drawRadius * 1.02
+                        );
+                        rimGrad.addColorStop(0, `rgba(255, 255, 255, 0)`);
+                        rimGrad.addColorStop(0.6, `rgba(255, 255, 255, 0.1)`);
+                        rimGrad.addColorStop(0.85, `rgba(255, 255, 255, 0.2)`);
+                        rimGrad.addColorStop(1, `rgba(255, 255, 255, 0)`);
+                        ctx.fillStyle = rimGrad;
+                        ctx.beginPath();
+                        ctx.arc(voidCx, voidCy, drawRadius * 1.02, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                } else {
+                    // Original black/gray core drawing code
+                    const sphereGrad = ctx.createRadialGradient(
+                        voidCx - drawRadius * 0.25,
+                        voidCy - drawRadius * 0.3,
+                        drawRadius * 0.05,
+                        voidCx,
+                        voidCy,
+                        drawRadius
+                    )
+                    const edgeR = Math.min(255, voidRgb.r + 18)
+                    const edgeG = Math.min(255, voidRgb.g + 18)
+                    const edgeB = Math.min(255, voidRgb.b + 18)
+                    sphereGrad.addColorStop(
+                        0,
+                        `rgba(${Math.min(255, voidRgb.r + 8)}, ${Math.min(255, voidRgb.g + 8)}, ${Math.min(255, voidRgb.b + 8)}, 1)`
+                    )
+                    sphereGrad.addColorStop(
+                        0.65,
+                        `rgba(${voidRgb.r}, ${voidRgb.g}, ${voidRgb.b}, 1)`
+                    )
+                    sphereGrad.addColorStop(
+                        0.92,
+                        `rgba(${edgeR}, ${edgeG}, ${edgeB}, 1)`
+                    )
+                    sphereGrad.addColorStop(
+                        1,
+                        `rgba(${edgeR}, ${edgeG}, ${edgeB}, 0.9)`
+                    )
+
+                    ctx.globalAlpha = 1.0
+                    ctx.fillStyle = sphereGrad
+                    ctx.beginPath()
+                    ctx.arc(voidCx, voidCy, drawRadius, 0, Math.PI * 2)
+                    ctx.fill()
+
+                    const rimGrad = ctx.createRadialGradient(
+                        voidCx,
+                        voidCy,
+                        drawRadius * 0.88,
+                        voidCx,
+                        voidCy,
+                        drawRadius * 1.02
+                    )
+                    rimGrad.addColorStop(0, `rgba(255, 255, 255, 0)`)
+                    rimGrad.addColorStop(0.6, `rgba(180, 180, 200, 0.06)`)
+                    rimGrad.addColorStop(0.85, `rgba(180, 180, 200, 0.12)`)
+                    rimGrad.addColorStop(1, `rgba(180, 180, 200, 0)`)
+                    ctx.globalAlpha = 1.0
+                    ctx.fillStyle = rimGrad
+                    ctx.beginPath()
+                    ctx.arc(voidCx, voidCy, drawRadius * 1.02, 0, Math.PI * 2)
+                    ctx.fill()
+                }
             }
 
             for (let i = 0; i < foregroundParticles.length; i++) {
