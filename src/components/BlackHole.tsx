@@ -533,7 +533,6 @@ export default function BlackHole(props: Props) {
         tiltSideway,
         trailAlpha,
         orbitSpeed,
-        pullSpeed,
         perspective,
     ])
 

@@ -1,16 +1,58 @@
 [
   {
     "id": "prod-1",
-    "title": "Signature Leather Tote",
-    "description": "Premium handcrafted leather tote with custom hardware. Designed in Europe, made for the world.",
-    "price": 1200,
-    "purchaseUrl": "#buy-tote",
+    "title": "Pro Training Boxing Gloves",
+    "description": "Premium handcrafted leather boxing gloves engineered for maximum performance. Optimal wrist support, superior multi-layer foam impact absorption, and a tailored ergonomic fit.",
+    "price": 120,
+    "purchaseUrl": "#buy-gloves",
     "releaseDate": "2024-05-01",
     "onSale": false,
     "outOfStock": false,
     "isFixedOnHome": true,
     "isHidden": false,
-    "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=2000&auto=format&fit=crop",
-    "material": "Genuine Calf Leather"
+    "imageUrl": "https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?q=80&w=2000&auto=format&fit=crop",
+    "material": "Genuine Premium Leather"
+  },
+  {
+    "id": "prod-2",
+    "title": "Elite Training Headgear",
+    "description": "Maximum visibility and protection for intensive sparring sessions.",
+    "price": 85,
+    "purchaseUrl": "#buy-headgear",
+    "releaseDate": "2024-05-15",
+    "onSale": true,
+    "outOfStock": false,
+    "isFixedOnHome": false,
+    "isHidden": false,
+    "imageUrl": "https://images.unsplash.com/photo-1592652427806-a4c330f6a392?q=80&w=2000&auto=format&fit=crop",
+    "material": "High-Density Foam"
+  },
+  {
+    "id": "prod-3",
+    "title": "Speed Hand Wraps",
+    "description": "Breathable and stretchable hand wraps designed for comfort and joint security.",
+    "price": 15,
+    "purchaseUrl": "#buy-wraps",
+    "releaseDate": "2024-06-01",
+    "onSale": false,
+    "outOfStock": true,
+    "isFixedOnHome": false,
+    "isHidden": false,
+    "imageUrl": "https://images.unsplash.com/photo-1517438322307-e67111335449?q=80&w=2000&auto=format&fit=crop",
+    "material": "Cotton Blend"
+  },
+  {
+    "id": "prod-4",
+    "title": "Combat Boxing Shoes",
+    "description": "Lightweight and agile boxing shoes for quick footwork in the ring.",
+    "price": 140,
+    "purchaseUrl": "#buy-shoes",
+    "releaseDate": "2024-06-15",
+    "onSale": false,
+    "outOfStock": false,
+    "isFixedOnHome": false,
+    "isHidden": false,
+    "imageUrl": "https://images.unsplash.com/photo-1622396090075-ab3b632fa1d5?q=80&w=2000&auto=format&fit=crop",
+    "material": "Mesh & Suede"
   }
 ]

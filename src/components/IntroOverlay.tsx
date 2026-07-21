@@ -78,17 +78,20 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
   }
 
   if (phase === 'imploding') {
-    pullSpeed = 20; // Massive pull to consume particles
+    pullSpeed = 4.5; // Beautiful spiraling pull speed to collapse the ring
+    coreRadiusScale = 0.65; // The sphere shrinks a bit simultaneously
+    ringOpacity = 1.0; // Keep the collapsing ring visible as it sucks in
   }
 
   if (phase === 'shrinking') {
-    ringOpacity = 0;
-    coreRadiusScale = 0.15; // Shrink the core only
+    pullSpeed = 4.5;
+    ringOpacity = 0; // Fade out remaining outer particles
+    coreRadiusScale = 0.25; // Shrink the core even smaller
   }
 
   if (phase === 'turning_white') {
     ringOpacity = 0;
-    coreRadiusScale = 0.15; // Stays small
+    coreRadiusScale = 0.25; // Stays small
     coreColorOverride = "#ffffff"; // Turns white
   }
 
