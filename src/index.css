@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600&family=Oswald:wght@300;400;500;600&family=Satisfy&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #e0a87e;
+  --color-brand-50: #fbf6f3;
+  --color-brand-100: #f5ebe3;
+  --color-brand-200: #ead0bd;
+  --color-brand-300: #deb596;
+  --color-brand-400: #e0a87e;
+  --color-brand-500: #d18d5e;
+  --color-brand-600: #c47648;
+  --color-brand-700: #a35e3a;
+  --color-brand-800: #854d34;
+  --color-brand-900: #6b402e;
+
+  --color-dark-bg: #121212;
+  --color-dark-surface: #1E1E1E;
+  --color-dark-card: #2A2A2A;
+
+  --font-sans: 'Manrope', sans-serif;
+  --font-display: 'Oswald', sans-serif;
+  --font-script: 'Satisfy', cursive;
+  --font-sport: 'Bebas Neue', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-[#121212] text-[#f5f5f5] overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .glass-nav {
+    background: rgba(18, 18, 18, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .delay-100 { transition-delay: 100ms; }
+  .delay-200 { transition-delay: 200ms; }
+  .delay-300 { transition-delay: 300ms; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1a1a1a; }
+::-webkit-scrollbar-thumb { background: #404040; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #e0a87e; }

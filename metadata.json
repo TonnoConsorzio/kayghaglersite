@@ -1,0 +1,6 @@
+{
+  "name": "Kay G. Hagler",
+  "description": "Premium Leather Goods",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

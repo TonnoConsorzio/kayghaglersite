@@ -1,0 +1,16 @@
+[
+  {
+    "id": "prod-1",
+    "title": "Signature Leather Tote",
+    "description": "Premium handcrafted leather tote with custom hardware. Designed in Europe, made for the world.",
+    "price": 1200,
+    "purchaseUrl": "#buy-tote",
+    "releaseDate": "2024-05-01",
+    "onSale": false,
+    "outOfStock": false,
+    "isFixedOnHome": true,
+    "isHidden": false,
+    "imageUrl": "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=2000&auto=format&fit=crop",
+    "material": "Genuine Calf Leather"
+  }
+]
