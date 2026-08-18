@@ -1,14 +1,19 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
+import translations from '../data/translations.json';
 
 export default function Footer() {
+  const { language } = useLanguage();
+  const t = translations[language].footer;
+
   return (
     <footer className="pb-8 px-4 md:px-8 mt-12">
         <div className="max-w-[1600px] mx-auto bg-[#1a1a1a] border border-white/10 rounded-[2rem] p-8 md:p-12 relative shadow-2xl">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
                 {/* Brand */}
                 <div>
-                    <span className="font-display text-2xl font-bold tracking-widest uppercase text-white">Kay G. Hagler</span>
+                    <img src="/Logo.svg" alt="Logo" className="h-8 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
                 </div>
 
                 {/* Links */}
@@ -16,7 +21,6 @@ export default function Footer() {
                     <a href="#" className="hover:text-brand transition-colors">Contacts</a>
                     <a href="#" className="hover:text-brand transition-colors">Privacy</a>
                     <a href="#" className="hover:text-brand transition-colors">Terms</a>
-                    <a href="#" className="hover:text-brand transition-colors">How it's made</a>
                 </div>
 
                 <button 
@@ -28,7 +32,7 @@ export default function Footer() {
             </div>
 
             <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-white/40">
-                <p>Copyright © 2024 Kay G. Hagler. All Rights Reserved.</p>
+                <p>{t.copyright}</p>
                 <p className="flex items-center gap-1">
                     Made with <span className="text-sm">❤️</span> & <span className="text-sm">🍕</span> by <a href="https://alessiobellan.it" target="_blank" rel="noopener noreferrer" className="text-brand hover:text-white transition-colors">Alessio Bellan</a>
                 </p>

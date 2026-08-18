@@ -1,12 +1,17 @@
 import React from 'react';
-import { MapPin, Gem, ShieldCheck, Sparkles } from 'lucide-react';
+import { BookOpen, Truck, ShieldCheck, Brain } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
+import translations from '../data/translations.json';
 
 export default function Features() {
+  const { language } = useLanguage();
+  const t = translations[language].features;
+
   const features = [
-    { icon: <MapPin className="w-5 h-5" />, label: "100% Made in Italy" },
-    { icon: <Gem className="w-5 h-5" />, label: "Luxury Italian Quality" },
-    { icon: <Sparkles className="w-5 h-5" />, label: "High Quality Materials" },
-    { icon: <ShieldCheck className="w-5 h-5" />, label: "Secure Checkout" }
+    { icon: <BookOpen className="w-5 h-5" />, label: t.content },
+    { icon: <Truck className="w-5 h-5" />, label: t.shipping },
+    { icon: <Brain className="w-5 h-5" />, label: t.knowledge },
+    { icon: <ShieldCheck className="w-5 h-5" />, label: t.secure }
   ];
 
   return (

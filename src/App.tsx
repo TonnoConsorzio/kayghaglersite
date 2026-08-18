@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import IntroOverlay from './components/IntroOverlay';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Features from './components/Features';
-import About from './components/About';
-import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
   const [introComplete, setIntroComplete] = useState(false);
@@ -12,7 +18,6 @@ export default function App() {
   useEffect(() => {
     if (!introComplete) return;
 
-    // Scroll Reveal Animation logic
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
@@ -28,7 +33,6 @@ export default function App() {
       const revealElements = document.querySelectorAll('.reveal');
       revealElements.forEach(el => observer.observe(el));
 
-      // Initial Load Animation check
       setTimeout(() => {
         document.querySelectorAll('.reveal').forEach((el, index) => {
           if (el.getBoundingClientRect().top < window.innerHeight) {
@@ -40,30 +44,26 @@ export default function App() {
       }, 100);
     };
 
-    // Small delay to ensure DOM is fully rendered after intro finishes
     setTimeout(setupReveal, 50);
 
     return () => observer.disconnect();
   }, [introComplete]);
 
   return (
-    <div className="selection:bg-brand-500 selection:text-white text-[#f5f5f5]">
-      {!introComplete && (
-        <IntroOverlay onComplete={() => setIntroComplete(true)} />
-      )}
-      
-      {/* We always render the main layout but can hide scrollbar when intro is active if needed, or it's just underneath */}
-      <div className={!introComplete ? 'h-screen overflow-hidden' : ''}>
-        <Navbar />
+    <Router>
+      <ScrollToTop />
+      <div className="selection:bg-brand-500 selection:text-white text-[#f5f5f5]">
+        {!introComplete && (
+          <IntroOverlay onComplete={() => setIntroComplete(true)} />
+        )}
         
-        <main className="w-full max-w-[1600px] mx-auto pt-24 pb-12 px-4 md:px-8 selection:bg-brand-500 selection:text-white">
-          <Hero />
-          <Features />
-          <About />
-        </main>
-
-        <Footer />
+        <div className={!introComplete ? 'h-screen overflow-hidden' : ''}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }

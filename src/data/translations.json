@@ -1,0 +1,38 @@
+{
+  "en": {
+    "nav": {
+      "about": "About"
+    },
+    "hero": {
+      "subtitle": "Discover our new book",
+      "button": "Explore More"
+    },
+    "features": {
+      "content": "High Quality Content",
+      "shipping": "Fast Shipping",
+      "knowledge": "Expert Knowledge",
+      "secure": "Secure Checkout"
+    },
+    "footer": {
+      "copyright": "© 2026 Your Brand. All rights reserved."
+    }
+  },
+  "it": {
+    "nav": {
+      "about": "Chi siamo"
+    },
+    "hero": {
+      "subtitle": "Scopri il nostro nuovo libro",
+      "button": "Scopri di più"
+    },
+    "features": {
+      "content": "Contenuto di Alta Qualità",
+      "shipping": "Spedizione Rapida",
+      "knowledge": "Conoscenza Esperta",
+      "secure": "Pagamento Sicuro"
+    },
+    "footer": {
+      "copyright": "© 2026 Your Brand. Tutti i diritti riservati."
+    }
+  }
+}
