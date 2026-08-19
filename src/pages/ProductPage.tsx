@@ -1,115 +1,71 @@
-import React, { useMemo, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import { ArrowLeft, ArrowUpRight, RefreshCw } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useLanguage } from '../i18n/LanguageContext';
-
-const productsModules = import.meta.glob('../data/products/*.json', { eager: true });
+import { useCatalog } from '../hooks/useCatalog';
+import { formatPrice, getLocalizedValue } from '../services/ecwidClient';
+import siteConfig from '../config/site.json';
 
 export default function ProductPage() {
   const { id } = useParams();
   const { language } = useLanguage();
-
-  const product = useMemo(() => {
-    for (const path in productsModules) {
-      const p = (productsModules[path] as any).default || productsModules[path];
-      if (p.id === id) {
-        return p;
-      }
-    }
-    return null;
-  }, [id]);
+  const { products, loading, error, retry } = useCatalog();
+  const product = useMemo(() => products.find((item) => item.id === id), [products, id]);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
-    if (product && product.ecwidStoreId) {
-      const scriptId = 'ecwid-script';
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement('script');
-        script.id = scriptId;
-        script.dataset.cfasync = "false";
-        script.src = `https://app.ecwid.com/script.js?${product.ecwidStoreId}&data_platform=code`;
-        script.charset = "utf-8";
-        document.body.appendChild(script);
+    setSelectedImage(0);
+    setImageFailed(false);
+    if (!product) return;
+    const title = getLocalizedValue(product.title, language);
+    document.title = `${title} · ${siteConfig.site.name}`;
+    const structuredData = document.createElement('script');
+    structuredData.type = 'application/ld+json';
+    structuredData.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: title,
+      description: getLocalizedValue(product.description, language),
+      image: product.images,
+      sku: product.sku,
+      offers: product.price === undefined ? undefined : { '@type': 'Offer', price: product.price, priceCurrency: product.currency, availability: product.inStock === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock' },
+    });
+    document.head.appendChild(structuredData);
+    return () => structuredData.remove();
+  }, [product, language]);
 
-        const initScript = document.createElement('script');
-        initScript.innerHTML = `
-          if (typeof xProductBrowser === 'function') {
-            xProductBrowser("id=my-store-${product.ecwidStoreId}");
-          } else {
-            window.ecwid_script_defer = true;
-            window.ecwid_dynamic_widgets = true;
-            window.ecwid_window_load = function() {
-              if (typeof xProductBrowser === 'function') {
-                xProductBrowser("id=my-store-${product.ecwidStoreId}");
-              }
-            };
-          }
-        `;
-        document.body.appendChild(initScript);
-      }
-    }
-  }, [product]);
+  const title = product ? getLocalizedValue(product.title, language) : '';
+  const description = product ? getLocalizedValue(product.description, language) : '';
+  const purchaseUrl = product?.url;
+  const backLabel = language === 'it' ? 'Torna al catalogo' : 'Back to catalogue';
 
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center">
-        <Navbar />
-        <h1 className="text-2xl font-bold">Product not found</h1>
-      </div>
-    );
-  }
-
-  const title = product.title[language] || product.title['en'];
-  const description = product.description[language] || product.description['en'];
-  const price = product.price;
-
-  return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white selection:bg-brand selection:text-black">
-      <Navbar />
-      
-      <main className="w-full max-w-[1600px] mx-auto pt-32 pb-12 px-4 md:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
-          {/* Images */}
-          <div className="space-y-4">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-white/5 relative">
-              <img 
-                src={product.images[0]} 
-                alt={title} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {product.images.length > 1 && (
-              <div className="grid grid-cols-4 gap-4">
-                {product.images.slice(1).map((img: string, index: number) => (
-                  <div key={index} className="aspect-square rounded-lg overflow-hidden bg-white/5 cursor-pointer hover:ring-2 hover:ring-brand transition-all">
-                    <img src={img} alt={`${title} ${index + 2}`} className="w-full h-full object-cover" />
-                  </div>
-                ))}
-              </div>
-            )}
+  return <div className="page-shell">
+    <Navbar />
+    <main id="main-content" className="page-content product-page">
+      {loading && <div className="catalog-state">{language === 'it' ? 'Caricamento prodotto…' : 'Loading product…'}</div>}
+      {!loading && error && !product && <div className="catalog-state catalog-state-error" role="alert"><p>{language === 'it' ? 'Impossibile caricare il prodotto.' : 'Could not load this product.'}</p><button type="button" className="button button-quiet" onClick={retry}><RefreshCw size={15} aria-hidden="true" /> {language === 'it' ? 'Riprova' : 'Try again'}</button></div>}
+      {!loading && !error && !product && <div className="catalog-state"><p>{language === 'it' ? 'Prodotto non trovato.' : 'Product not found.'}</p><Link to="/#catalogue" className="text-link"><ArrowLeft size={15} aria-hidden="true" /> {backLabel}</Link></div>}
+      {product && <>
+        <Link to="/#catalogue" className="back-link"><ArrowLeft size={15} aria-hidden="true" /> {backLabel}</Link>
+        <div className="product-detail">
+          <div className="product-gallery">
+            <div className="product-main-image">{product.images[selectedImage] && !imageFailed ? <img src={product.images[selectedImage]} alt={title} width="1000" height="1250" fetchPriority="high" onError={() => setImageFailed(true)} /> : <div className="product-image-fallback" aria-hidden="true" />}</div>
+            {product.images.length > 1 && <div className="product-thumbnails">{product.images.map((image, index) => <button type="button" key={image} className={selectedImage === index ? 'thumbnail thumbnail-active' : 'thumbnail'} onClick={() => { setSelectedImage(index); setImageFailed(false); }} aria-label={`${title} ${index + 1}`} aria-pressed={selectedImage === index}><img src={image} alt="" width="180" height="220" loading="lazy" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} /></button>)}</div>}
           </div>
-
-          {/* Details */}
-          <div className="flex flex-col pt-8">
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold uppercase mb-4">{title}</h1>
-            <p className="text-2xl font-bold text-brand mb-8">€{price.toFixed(2)}</p>
-            
-            <div className="text-white/70 text-lg leading-relaxed mb-12">
-              <p>{description}</p>
-            </div>
-            
-            {/* Ecwid Widget Container */}
-            <div id={`my-store-${product.ecwidStoreId}`} className="mt-8 bg-white/5 rounded-2xl p-6 min-h-[300px]">
-              {/* Ecwid widget will render here */}
-            </div>
-
+          <div className="product-detail-copy">
+            <p className="eyebrow">{product.category ?? 'Kay G. Hagler'}</p>
+            <h1>{title}</h1>
+            <p className="product-detail-price">{formatPrice(product.price, product.currency, language) || 'Price on request'}</p>
+            <p className="product-description">{description.replace(/<[^>]*>/g, '')}</p>
+            {purchaseUrl ? <a href={purchaseUrl} className="button button-primary" target="_blank" rel="noopener noreferrer">{language === 'it' ? 'Acquista su Ecwid' : 'Buy on Ecwid'} <ArrowUpRight size={17} aria-hidden="true" /></a> : <p className="product-note">{language === 'it' ? 'Acquisto online in arrivo.' : 'Online checkout coming soon.'}</p>}
+            {product.inStock === false && <p className="product-note">{language === 'it' ? 'Al momento non disponibile.' : 'Currently unavailable.'}</p>}
           </div>
-
         </div>
-      </main>
-
-      <Footer />
-    </div>
-  );
+      </>}
+    </main>
+    <Footer />
+  </div>;
 }

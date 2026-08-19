@@ -107,8 +107,7 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
       ref={containerRef}
       className="fixed inset-0 z-[100] bg-[#121212] transition-opacity duration-1000 flex items-center justify-center overflow-hidden"
       style={{ opacity }}
-      onMouseMove={handleInteraction}
-      onClick={handleInteraction}
+      aria-label="Intro animation"
     >
         {/* The Black Hole Canvas with NO CSS transforms during collapse */}
         <div className="absolute inset-0 transition-all origin-center pointer-events-none duration-[0ms] scale-100 brightness-100 grayscale-0">
@@ -130,6 +129,10 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
         <div 
             className={`absolute inset-0 bg-white pointer-events-none transition-opacity ${phase === 'exploding' || phase === 'fading_out' ? 'opacity-100 duration-300' : 'opacity-0 duration-200'}`} 
         />
+
+        <button type="button" className="absolute bottom-8 right-8 z-10 border border-white/20 rounded-full px-4 py-2 text-xs uppercase tracking-widest text-white/70 hover:text-white hover:border-white/50 transition-colors" onClick={handleInteraction}>
+          Skip intro
+        </button>
 
         {/* Loading text */}
         <div className={`absolute bottom-16 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-[0.4em] uppercase transition-opacity duration-500 font-medium ${phase === 'idle' ? 'opacity-100 animate-pulse' : 'opacity-0'}`}>

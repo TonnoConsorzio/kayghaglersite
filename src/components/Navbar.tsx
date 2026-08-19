@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Menu } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Globe, Menu, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import translations from '../data/translations.json';
+import siteConfig from '../config/site.json';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   const t = translations[language];
 
@@ -16,44 +19,27 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300 ${scrolled ? 'shadow-lg' : ''}`}>
-        <div className="md:px-12 flex h-20 max-w-[1600px] mx-auto px-6 items-center justify-between">
-            
-            {/* Logo Left */}
-            <div className="flex items-center">
-                <img src="/Logo.svg" alt="Logo" className="h-8" />
-            </div>
-
-            {/* Links Center */}
-            <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 text-xs font-medium tracking-widest uppercase text-white/60">
-                <a href="#" className="hover:text-brand transition-colors">Home</a>
-                <a href="#about" className="hover:text-brand transition-colors text-white">{t.nav.about}</a>
-            </div>
-
-            {/* Icons Right */}
-            <div className="flex items-center gap-6">
-                <div className="flex items-center gap-3 text-lg cursor-pointer select-none">
-                    <span 
-                      className={`transition-opacity ${language === 'it' ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale'}`} 
-                      onClick={() => setLanguage('it')}
-                      title="Italiano"
-                    >
-                      🇮🇹
-                    </span>
-                    <span 
-                      className={`transition-opacity ${language === 'en' ? 'opacity-100 grayscale-0' : 'opacity-40 grayscale'}`} 
-                      onClick={() => setLanguage('en')}
-                      title="English"
-                    >
-                      🇬🇧
-                    </span>
-                </div>
-                <button className="md:hidden text-white">
-                    <Menu className="w-6 h-6" />
-                </button>
-            </div>
+  return <header className={`site-header ${scrolled ? 'site-header-scrolled' : ''}`}>
+    <nav className="site-nav" aria-label="Primary navigation">
+      <Link to="/" className="brand-mark" aria-label={siteConfig.site.name} onClick={() => setMenuOpen(false)}>
+        <img src={siteConfig.site.logo} alt={siteConfig.site.name} width="150" height="32" />
+      </Link>
+      <div id="site-navigation" className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>{t.nav.home ?? 'Home'}</Link>
+        <a href="/#catalogue" onClick={() => setMenuOpen(false)}>{t.nav.catalogue ?? 'Catalogue'}</a>
+        <a href="/#about" onClick={() => setMenuOpen(false)}>{t.nav.about}</a>
+      </div>
+      <div className="nav-actions">
+        <div className="language-switcher" aria-label="Language">
+          <Globe size={15} aria-hidden="true" />
+          <button type="button" className={language === 'it' ? 'language-active' : ''} onClick={() => setLanguage('it')} aria-label="Italiano">IT</button>
+          <span aria-hidden="true">/</span>
+          <button type="button" className={language === 'en' ? 'language-active' : ''} onClick={() => setLanguage('en')} aria-label="English">EN</button>
         </div>
+        <button type="button" className="menu-toggle" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-controls="site-navigation" aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
+          {menuOpen ? <X size={21} aria-hidden="true" /> : <Menu size={21} aria-hidden="true" />}
+        </button>
+      </div>
     </nav>
-  );
+  </header>;
 }

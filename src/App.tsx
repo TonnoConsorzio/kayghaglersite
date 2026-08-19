@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import IntroOverlay from './components/IntroOverlay';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
+import siteConfig from './config/site.json';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -13,7 +14,7 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [introComplete, setIntroComplete] = useState(false);
+  const [introComplete, setIntroComplete] = useState(!siteConfig.intro.enabled);
 
   useEffect(() => {
     if (!introComplete) return;
@@ -52,7 +53,8 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="selection:bg-brand-500 selection:text-white text-[#f5f5f5]">
+      <div className="selection:bg-brand-500 selection:text-white">
+        <a className="skip-link" href="#main-content">Skip to content</a>
         {!introComplete && (
           <IntroOverlay onComplete={() => setIntroComplete(true)} />
         )}

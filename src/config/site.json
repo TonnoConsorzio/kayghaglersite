@@ -1,0 +1,55 @@
+{
+  "site": {
+    "name": "Kay G. Hagler",
+    "tagline": {
+      "en": "Books for the curious mind.",
+      "it": "Libri per menti curiose."
+    },
+    "description": {
+      "en": "Independent books and ideas for people who keep looking closer.",
+      "it": "Libri e idee indipendenti per chi continua a guardare più da vicino."
+    },
+    "logo": "/Logo.svg",
+    "currency": "EUR"
+  },
+  "intro": {
+    "enabled": false
+  },
+  "homepage": {
+    "hero": {
+      "eyebrow": {
+        "en": "New from the studio",
+        "it": "Novità dallo studio"
+      },
+      "button": {
+        "en": "View book",
+        "it": "Vedi il libro"
+      }
+    },
+    "featuredProducts": {
+      "enabled": true,
+      "mode": "latest",
+      "limit": 4,
+      "eyebrow": {
+        "en": "The catalogue",
+        "it": "Il catalogo"
+      },
+      "title": {
+        "en": "Ideas worth keeping close.",
+        "it": "Idee da tenere vicino."
+      },
+      "description": {
+        "en": "A small selection from the current Ecwid catalogue.",
+        "it": "Una selezione dal catalogo Ecwid attuale."
+      }
+    },
+    "about": {
+      "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1600&auto=format&fit=crop"
+    }
+  },
+  "ecwid": {
+    "storeId": "",
+    "publicToken": "",
+    "catalogPath": "https://app.ecwid.com/api/v3"
+  }
+}
