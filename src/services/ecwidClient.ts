@@ -1,5 +1,6 @@
 import siteConfig from '../config/site.json';
-import type { Language, LocalizedText, Product } from '../types/catalog';
+import productOverrides from '../data/product-overrides.json';
+import type { Language, LocalizedText, Product, ProductOverride } from '../types/catalog';
 
 type EcwidProduct = {
   id: number | string;
@@ -14,7 +15,15 @@ type EcwidProduct = {
   thumbnailUrl?: string;
   imageUrl?: string;
   originalImageUrl?: string;
-  galleryImages?: Array<{ url?: string; originalUrl?: string; thumbnailUrl?: string }>;
+  galleryImages?: Array<{
+    orderBy?: number;
+    url?: string;
+    originalUrl?: string;
+    originalImageUrl?: string;
+    imageUrl?: string;
+    thumbnailUrl?: string;
+  }>;
+  url?: string;
   productUrl?: string;
   categoryIds?: Array<number | string>;
   categories?: Array<{ name?: string; nameTranslated?: Record<string, string> }>;
@@ -26,6 +35,15 @@ type EcwidProduct = {
   sku?: string;
   enabled?: boolean;
   customSlug?: string;
+  originalImage?: { url?: string };
+  media?: {
+    images?: Array<{
+      orderBy?: number;
+      imageOriginalUrl?: string;
+      image1500pxUrl?: string;
+      image800pxUrl?: string;
+    }>;
+  };
 };
 
 type EcwidResponse = { items?: EcwidProduct[] };
@@ -36,14 +54,16 @@ const localModules = import.meta.glob('../data/products/*.json', {
 }) as Record<string, Record<string, unknown>>;
 
 const config = siteConfig as typeof siteConfig & {
-  ecwid: { storeId: string; publicToken: string; catalogPath: string };
+  ecwid: { storeId: string; catalogPath: string };
 };
 
 const ecwid = {
   storeId: import.meta.env.VITE_ECWID_STORE_ID || config.ecwid.storeId,
-  publicToken: import.meta.env.VITE_ECWID_PUBLIC_TOKEN || config.ecwid.publicToken,
+  publicToken: import.meta.env.VITE_ECWID_PUBLIC_TOKEN,
   catalogPath: import.meta.env.VITE_ECWID_CATALOG_PATH || config.ecwid.catalogPath,
 };
+
+const overrides = productOverrides as Record<string, ProductOverride>;
 
 let catalogRequest: Promise<Product[]> | null = null;
 
@@ -51,21 +71,38 @@ function textMap(value?: string, translated?: Record<string, string>): Localized
   return { ...(translated ?? {}), ...(value ? { en: value } : {}) };
 }
 
+function applyOverride(product: Product): Product {
+  const override = overrides[product.id];
+  if (!override) return product;
+  return {
+    ...product,
+    title: { ...product.title, ...override.title },
+    description: { ...product.description, ...override.description },
+    price: override.price ?? product.price,
+    compareToPrice: override.compareToPrice ?? product.compareToPrice,
+    currency: override.currency ?? product.currency,
+    images: override.images?.length ? override.images : product.images,
+  };
+}
+
+function uniqueImages(images: Array<string | undefined>): string[] {
+  return [...new Set(images.filter((image): image is string => Boolean(image)))];
+}
+
 function normalizeProduct(product: EcwidProduct): Product {
-  const gallery = (product.galleryImages ?? []).flatMap((image) => [
-    image.originalUrl,
-    image.url,
-    image.thumbnailUrl,
-  ]).filter((image): image is string => Boolean(image));
-  const images = [...new Set([
-    product.originalImageUrl,
-    product.imageUrl,
-    product.thumbnailUrl,
-    ...gallery,
-  ].filter((image): image is string => Boolean(image)))];
+  const mediaImages = [...(product.media?.images ?? [])]
+    .sort((a, b) => (a.orderBy ?? 0) - (b.orderBy ?? 0))
+    .map((image) => image.imageOriginalUrl ?? image.image1500pxUrl ?? image.image800pxUrl);
+  const galleryImages = [...(product.galleryImages ?? [])]
+    .sort((a, b) => (a.orderBy ?? 0) - (b.orderBy ?? 0))
+    .map((image) => image.originalImageUrl ?? image.originalUrl ?? image.url ?? image.imageUrl);
+  const images = uniqueImages(mediaImages.length ? mediaImages : [
+    product.originalImage?.url ?? product.originalImageUrl,
+    ...galleryImages,
+  ]);
   const category = product.categories?.[0];
 
-  return {
+  return applyOverride({
     id: String(product.id),
     title: textMap(product.name, product.nameTranslated),
     description: textMap(product.description, product.descriptionTranslated),
@@ -74,7 +111,7 @@ function normalizeProduct(product: EcwidProduct): Product {
     currency: product.currency ?? config.site.currency,
     images,
     category: category?.nameTranslated?.en ?? category?.name,
-    url: product.productUrl,
+    url: product.url ?? product.productUrl,
     inStock: product.inStock,
     quantity: product.quantity,
     unlimited: product.unlimited,
@@ -84,11 +121,11 @@ function normalizeProduct(product: EcwidProduct): Product {
     isHidden: product.enabled === false,
     source: 'ecwid',
     ecwidStoreId: ecwid.storeId,
-  };
+  });
 }
 
 function getLocalProducts(): Product[] {
-  return Object.values(localModules).map((product) => ({
+  return Object.values(localModules).map((product) => applyOverride({
     ...(product as unknown as Product),
     currency: (product.currency as string | undefined) ?? config.site.currency,
     source: 'local' as const,
@@ -101,7 +138,8 @@ async function fetchEcwidProducts(): Promise<Product[]> {
 
   const params = new URLSearchParams({
     limit: '100',
-    responseFields: 'id,name,nameTranslated,description,descriptionTranslated,price,priceInProductList,compareToPrice,currency,thumbnailUrl,imageUrl,originalImageUrl,galleryImages,productUrl,categoryIds,categories,inStock,quantity,unlimited,created,updated,sku,enabled',
+    visibleInStorefront: 'true',
+    responseFields: 'total,items(id,name,nameTranslated,description,descriptionTranslated,price,priceInProductList,compareToPrice,currency,thumbnailUrl,imageUrl,originalImageUrl,originalImage,galleryImages,media,url,productUrl,categoryIds,categories,inStock,quantity,unlimited,created,updated,sku,enabled)',
   });
   const response = await fetch(`${catalogPath}/${encodeURIComponent(storeId)}/products?${params}`, {
     headers: { Authorization: `Bearer ${publicToken}` },

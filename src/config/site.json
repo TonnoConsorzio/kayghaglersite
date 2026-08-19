@@ -13,14 +13,10 @@
     "currency": "EUR"
   },
   "intro": {
-    "enabled": false
+    "enabled": true
   },
   "homepage": {
     "hero": {
-      "eyebrow": {
-        "en": "New from the studio",
-        "it": "Novità dallo studio"
-      },
       "button": {
         "en": "View book",
         "it": "Vedi il libro"
@@ -30,10 +26,6 @@
       "enabled": true,
       "mode": "latest",
       "limit": 4,
-      "eyebrow": {
-        "en": "The catalogue",
-        "it": "Il catalogo"
-      },
       "title": {
         "en": "Ideas worth keeping close.",
         "it": "Idee da tenere vicino."
@@ -43,13 +35,138 @@
         "it": "Una selezione dal catalogo Ecwid attuale."
       }
     },
-    "about": {
-      "image": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=1600&auto=format&fit=crop"
+    "introduction": {
+      "title": {
+        "en": "Introduction",
+        "it": "Introduzione"
+      },
+      "fallback": {
+        "en": "A first passage into the book. Read the description from the catalogue, then follow the thread further.",
+        "it": "Un primo passaggio dentro il libro. Leggi la descrizione del catalogo, poi segui il filo più avanti."
+      }
+    }
+  },
+  "footer": {
+    "contactEmail": "hello@kayghagler.com",
+    "copyright": {
+      "en": "© 2026 Kay G. Hagler. All rights reserved.",
+      "it": "© 2026 Kay G. Hagler. Tutti i diritti riservati."
+    },
+    "credit": {
+      "en": "Made with ♥ and 🍕 by Alessio Bellan",
+      "it": "Made with ♥ e 🍕 by Alessio Bellan"
+    }
+  },
+  "legal": {
+    "seller": {
+      "name": "[LEGAL SELLER NAME]",
+      "address": "[LEGAL SELLER ADDRESS]",
+      "email": "hello@kayghagler.com"
+    },
+    "privacy": {
+      "title": {
+        "en": "Privacy policy",
+        "it": "Privacy policy"
+      },
+      "intro": {
+        "en": "This policy explains how the seller handles personal data when you browse this site or buy a book.",
+        "it": "Questa informativa spiega come il venditore tratta i dati personali quando visiti il sito o acquisti un libro."
+      },
+      "sections": [
+        {
+          "heading": { "en": "Data controller", "it": "Titolare del trattamento" },
+          "paragraphs": {
+            "en": ["The data controller is {{sellerName}}, {{sellerAddress}}. Contact: {{sellerEmail}}."],
+            "it": ["Il titolare del trattamento è {{sellerName}}, {{sellerAddress}}. Contatto: {{sellerEmail}}."]
+          }
+        },
+        {
+          "heading": { "en": "Data we use", "it": "Dati trattati" },
+          "paragraphs": {
+            "en": ["We may process contact details, shipping details, order details, language preferences and messages you send to us. Payment details are handled by Ecwid and its payment providers; we do not store full card numbers."],
+            "it": ["Possiamo trattare dati di contatto, dati di spedizione, dati dell'ordine, preferenze linguistiche e messaggi che ci invii. I dati di pagamento sono gestiti da Ecwid e dai suoi fornitori di pagamento; non conserviamo i numeri completi delle carte."]
+          }
+        },
+        {
+          "heading": { "en": "Why we use data", "it": "Finalità del trattamento" },
+          "paragraphs": {
+            "en": ["We use data to process orders, deliver books, answer requests, provide customer support, meet legal obligations and protect the store from fraud or misuse."],
+            "it": ["Usiamo i dati per gestire gli ordini, consegnare i libri, rispondere alle richieste, fornire assistenza, rispettare obblighi di legge e proteggere il negozio da frodi o abusi."]
+          }
+        },
+        {
+          "heading": { "en": "Ecwid and service providers", "it": "Ecwid e fornitori di servizio" },
+          "paragraphs": {
+            "en": ["The catalogue, cart and checkout are provided through Ecwid. Ecwid, shipping partners and payment providers process only the data needed for their services under their own terms and privacy policies."],
+            "it": ["Catalogo, carrello e checkout sono forniti tramite Ecwid. Ecwid, i partner di spedizione e i fornitori di pagamento trattano i dati necessari ai rispettivi servizi secondo i loro termini e le loro informative."]
+          }
+        },
+        {
+          "heading": { "en": "Retention and rights", "it": "Conservazione e diritti" },
+          "paragraphs": {
+            "en": ["We keep order records for the period required by law and other data only as long as needed for the stated purposes. Subject to applicable law, you may request access, correction, deletion, restriction, portability or objection by writing to {{sellerEmail}}."],
+            "it": ["Conserviamo i dati degli ordini per il periodo richiesto dalla legge e gli altri dati solo per il tempo necessario alle finalità indicate. Nei limiti della legge applicabile puoi chiedere accesso, rettifica, cancellazione, limitazione, portabilità o opposizione scrivendo a {{sellerEmail}}."]
+          }
+        }
+      ]
+    },
+    "terms": {
+      "title": {
+        "en": "Terms & conditions",
+        "it": "Termini e condizioni"
+      },
+      "intro": {
+        "en": "These terms apply to online sales of books made through this site and the Ecwid checkout.",
+        "it": "Questi termini si applicano alla vendita online di libri effettuata tramite questo sito e il checkout Ecwid."
+      },
+      "sections": [
+        {
+          "heading": { "en": "Seller and orders", "it": "Venditore e ordini" },
+          "paragraphs": {
+            "en": ["The seller is {{sellerName}}, {{sellerAddress}}, contactable at {{sellerEmail}}. An order becomes binding when Ecwid confirms it and payment is accepted. Product availability, price, taxes and shipping costs appear at checkout before payment."],
+            "it": ["Il venditore è {{sellerName}}, {{sellerAddress}}, contattabile a {{sellerEmail}}. L'ordine diventa vincolante quando Ecwid lo conferma e il pagamento viene accettato. Disponibilità, prezzo, imposte e costi di spedizione sono mostrati prima del pagamento."]
+          }
+        },
+        {
+          "heading": { "en": "Books and content", "it": "Libri e contenuti" },
+          "paragraphs": {
+            "en": ["We describe each book with reasonable care. Covers, colours and layout may vary slightly from the images on screen. Text and images on this site remain protected by applicable intellectual-property laws."],
+            "it": ["Descriviamo ogni libro con ragionevole accuratezza. Copertine, colori e impaginazione possono variare leggermente rispetto alle immagini visualizzate. Testi e immagini del sito restano protetti dalle norme applicabili sulla proprietà intellettuale."]
+          }
+        },
+        {
+          "heading": { "en": "Delivery", "it": "Spedizione" },
+          "paragraphs": {
+            "en": ["We ship to the destinations shown at Ecwid checkout. Delivery estimates are indicative and may change because of carrier delays, customs or events outside our control. We will use the contact details in the order to communicate material problems."],
+            "it": ["Spediamo verso le destinazioni mostrate nel checkout Ecwid. I tempi indicati sono stimati e possono cambiare per ritardi del corriere, dogana o eventi fuori dal nostro controllo. Useremo i dati dell'ordine per comunicare problemi rilevanti."]
+          }
+        },
+        {
+          "heading": { "en": "Withdrawal, returns and legal guarantee", "it": "Recesso, resi e garanzia legale" },
+          "paragraphs": {
+            "en": ["For standard physical books sold to consumers in the European Union, the statutory withdrawal period generally lasts 14 days from delivery, subject to applicable law and its exceptions. Contact {{sellerEmail}} before returning an item and follow the return instructions. Return shipping is normally paid by the customer unless the law or the seller says otherwise.", "We do not offer discretionary refunds outside the statutory withdrawal rights, remedies for damaged or non-conforming goods, or other rights that cannot legally be excluded. Nothing in these terms limits mandatory consumer protection."],
+            "it": ["Per i libri fisici standard venduti a consumatori nell'Unione Europea, il termine legale di recesso dura in genere 14 giorni dalla consegna, salvo legge applicabile ed eventuali eccezioni. Contatta {{sellerEmail}} prima di restituire un articolo e segui le istruzioni per il reso. Il costo della restituzione è normalmente a carico del cliente, salvo diversa previsione di legge o del venditore.", "Non offriamo rimborsi discrezionali fuori dai diritti di recesso previsti dalla legge, dai rimedi per prodotti danneggiati o non conformi e dagli altri diritti inderogabili. Nessuna clausola limita le tutele obbligatorie del consumatore."]
+          }
+        },
+        {
+          "heading": { "en": "Damaged or incorrect books", "it": "Libri danneggiati o non conformi" },
+          "paragraphs": {
+            "en": ["If a book arrives damaged, defective or materially different from the order, contact {{sellerEmail}} with the order number and photographs. We will assess the request and provide the remedy required by applicable consumer law."],
+            "it": ["Se un libro arriva danneggiato, difettoso o sostanzialmente diverso dall'ordine, contatta {{sellerEmail}} indicando il numero d'ordine e allegando fotografie. Valuteremo la richiesta e forniremo il rimedio previsto dalla legge applicabile."]
+          }
+        },
+        {
+          "heading": { "en": "Applicable law", "it": "Legge applicabile" },
+          "paragraphs": {
+            "en": ["These terms are subject to the mandatory consumer rules that apply to the buyer. Complete the seller details and applicable jurisdiction before publishing this page."],
+            "it": ["Questi termini rispettano le norme inderogabili a tutela del consumatore applicabili all'acquirente. Completa i dati del venditore e la giurisdizione applicabile prima di pubblicare questa pagina."]
+          }
+        }
+      ]
     }
   },
   "ecwid": {
-    "storeId": "",
-    "publicToken": "",
+    "storeId": "141046752",
     "catalogPath": "https://app.ecwid.com/api/v3"
   }
 }

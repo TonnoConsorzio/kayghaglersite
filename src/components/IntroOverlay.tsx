@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import BlackHole from './BlackHole';
 
 type Phase = 'idle' | 'imploding' | 'shrinking' | 'turning_white' | 'exploding' | 'fading_out';
@@ -6,138 +6,58 @@ type Phase = 'idle' | 'imploding' | 'shrinking' | 'turning_white' | 'exploding' 
 export default function IntroOverlay({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<Phase>('idle');
   const [opacity, setOpacity] = useState(1);
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Auto-skip if no interaction for a bit (simulate reading/loading)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (phase === 'idle') {
-        setPhase('imploding'); // Auto-trigger implosion after 3 seconds
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const short = window.innerWidth < 600;
+    const timer = window.setTimeout(() => setPhase(reduced ? 'fading_out' : 'imploding'), reduced ? 80 : short ? 350 : 450);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const short = window.innerWidth < 600;
+    const durations: Partial<Record<Phase, number>> = {
+      imploding: short ? 600 : 900,
+      shrinking: short ? 450 : 550,
+      turning_white: short ? 180 : 220,
+      exploding: short ? 260 : 320,
+      fading_out: short ? 260 : 320,
+    };
+    const duration = durations[phase];
+    if (!duration) return;
+    const timer = window.setTimeout(() => {
+      if (phase === 'fading_out') {
+        setOpacity(0);
+        window.setTimeout(onComplete, short ? 260 : 320);
+      } else {
+        setPhase(({ imploding: 'shrinking', shrinking: 'turning_white', turning_white: 'exploding', exploding: 'fading_out' } as const)[phase]);
       }
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [phase]);
-
-  // Handle phase transitions
-  useEffect(() => {
-    if (phase === 'imploding') {
-      // Ring collapses into center
-      const t = setTimeout(() => {
-        setPhase('shrinking');
-      }, 1800);
-      return () => clearTimeout(t);
-    }
-    
-    if (phase === 'shrinking') {
-      // Sphere shrinks and turns white
-      const t = setTimeout(() => {
-        setPhase('turning_white');
-      }, 1200);
-      return () => clearTimeout(t);
-    }
-
-    if (phase === 'turning_white') {
-      // Stays small and pure white to build anticipation
-      const t = setTimeout(() => {
-        setPhase('exploding');
-      }, 600);
-      return () => clearTimeout(t);
-    }
-    
-    if (phase === 'exploding') {
-      // Explodes massively, triggers whiteout
-      const t = setTimeout(() => {
-        setPhase('fading_out');
-      }, 800);
-      return () => clearTimeout(t);
-    }
-
-    if (phase === 'fading_out') {
-      // Fades out intro overlay entirely
-      setOpacity(0);
-      const t = setTimeout(onComplete, 1000);
-      return () => clearTimeout(t);
-    }
+    }, duration);
+    return () => window.clearTimeout(timer);
   }, [phase, onComplete]);
 
-  const handleInteraction = () => {
-    if (phase === 'idle') {
-      setPhase('imploding');
-    }
-  };
+  const skip = () => setPhase('fading_out');
+  const imploding = phase !== 'idle';
+  const shrinking = phase === 'shrinking' || phase === 'turning_white';
+  const exploding = phase === 'exploding' || phase === 'fading_out';
 
-  // BlackHole props based on phase
-  let disableRespawn = false;
-  let pullSpeed = 0.5;
-  let coreRadiusScale = 1;
-  let coreColorOverride: string | undefined = undefined;
-  let ringOpacity = 1;
-
-  if (phase !== 'idle') {
-    disableRespawn = true;
-  }
-
-  if (phase === 'imploding') {
-    pullSpeed = 16.0; // Strong spiraling pull to completely swallow the ring
-    coreRadiusScale = 1.0; // The sphere remains full size while swallowing
-    ringOpacity = 1.0; // Keep the collapsing ring fully visible
-  }
-
-  if (phase === 'shrinking') {
-    pullSpeed = 16.0;
-    ringOpacity = 0; // Fade out remaining stray dust
-    coreRadiusScale = 0.20; // Shrink the core down to a small dense point
-    coreColorOverride = "#ffffff"; // Turns white as it compresses
-  }
-
-  if (phase === 'turning_white') {
-    ringOpacity = 0;
-    coreRadiusScale = 0.20; // Stays small and dense
-    coreColorOverride = "#ffffff"; // White point of energy
-  }
-
-  if (phase === 'exploding' || phase === 'fading_out') {
-    ringOpacity = 0;
-    coreRadiusScale = 80; // Expands massively
-    coreColorOverride = "#ffffff";
-  }
-
-  return (
-    <div 
-      ref={containerRef}
-      className="fixed inset-0 z-[100] bg-[#121212] transition-opacity duration-1000 flex items-center justify-center overflow-hidden"
-      style={{ opacity }}
-      aria-label="Intro animation"
-    >
-        {/* The Black Hole Canvas with NO CSS transforms during collapse */}
-        <div className="absolute inset-0 transition-all origin-center pointer-events-none duration-[0ms] scale-100 brightness-100 grayscale-0">
-            <BlackHole 
-                orbitSpeed={5}
-                pullSpeed={pullSpeed}
-                particleSize={8}
-                particleCount={1500}
-                colors={["#ffffff", "#e0a87e"]}
-                tilt={20}
-                disableRespawn={disableRespawn}
-                coreRadiusScale={coreRadiusScale}
-                coreColorOverride={coreColorOverride}
-                ringOpacity={ringOpacity}
-            />
-        </div>
-        
-        {/* Full whiteout flash overlay during explosion */}
-        <div 
-            className={`absolute inset-0 bg-white pointer-events-none transition-opacity ${phase === 'exploding' || phase === 'fading_out' ? 'opacity-100 duration-300' : 'opacity-0 duration-200'}`} 
-        />
-
-        <button type="button" className="absolute bottom-8 right-8 z-10 border border-white/20 rounded-full px-4 py-2 text-xs uppercase tracking-widest text-white/70 hover:text-white hover:border-white/50 transition-colors" onClick={handleInteraction}>
-          Skip intro
-        </button>
-
-        {/* Loading text */}
-        <div className={`absolute bottom-16 left-1/2 -translate-x-1/2 text-white/50 text-xs tracking-[0.4em] uppercase transition-opacity duration-500 font-medium ${phase === 'idle' ? 'opacity-100 animate-pulse' : 'opacity-0'}`}>
-            Loading...
-        </div>
+  return <div className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden bg-[#0d0c0d] transition-opacity duration-500" style={{ opacity }} role="dialog" aria-label="Opening animation" aria-modal="true">
+    <div className="absolute inset-0 pointer-events-none">
+      <BlackHole
+        orbitSpeed={5}
+        pullSpeed={imploding ? 16 : .5}
+        particleSize={6}
+        particleCount={window.innerWidth < 600 ? 360 : 900}
+        colors={["#ffffff", "#d7a36d"]}
+        tilt={20}
+        disableRespawn={imploding}
+        coreRadiusScale={exploding ? 80 : shrinking ? .2 : 1}
+        coreColorOverride={shrinking || exploding ? '#ffffff' : undefined}
+        ringOpacity={shrinking || exploding ? 0 : 1}
+      />
     </div>
-  );
+    <div className={`absolute inset-0 pointer-events-none bg-white transition-opacity ${exploding ? 'opacity-100 duration-200' : 'opacity-0 duration-150'}`} />
+    <p className={`absolute bottom-16 left-1/2 -translate-x-1/2 text-white/60 text-[11px] tracking-[.3em] uppercase transition-opacity duration-300 ${phase === 'idle' ? 'opacity-100' : 'opacity-0'}`}>Kay G. Hagler</p>
+    <button type="button" className="absolute bottom-8 right-8 z-10 min-h-11 rounded-full border border-white/25 px-4 py-2 text-xs uppercase tracking-widest text-white/75 transition-colors hover:border-white hover:text-white" onClick={skip}>Skip intro</button>
+  </div>;
 }

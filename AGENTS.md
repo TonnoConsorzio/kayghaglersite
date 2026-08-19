@@ -15,6 +15,7 @@
 
 - Keep Ecwid normalization in `src/services/ecwidClient.ts`.
 - Keep editorial copy and feature flags in `src/config/site.json`.
+- Keep per-product editorial overrides in `src/data/product-overrides.json`; overrides replace missing or unwanted Ecwid fields.
 - Reuse `Product`, `useCatalog`, `ProductCard`, and `ProductGrid` before adding parallel patterns.
 - Use semantic links/buttons, visible focus states, explicit image dimensions, and reduced-motion support.
 

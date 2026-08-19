@@ -7,6 +7,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { useCatalog } from '../hooks/useCatalog';
 import { formatPrice, getLocalizedValue } from '../services/ecwidClient';
 import siteConfig from '../config/site.json';
+import LiquidImage from '../components/LiquidImage';
 
 export default function ProductPage() {
   const { id } = useParams();
@@ -47,16 +48,15 @@ export default function ProductPage() {
     <main id="main-content" className="page-content product-page">
       {loading && <div className="catalog-state">{language === 'it' ? 'Caricamento prodotto…' : 'Loading product…'}</div>}
       {!loading && error && !product && <div className="catalog-state catalog-state-error" role="alert"><p>{language === 'it' ? 'Impossibile caricare il prodotto.' : 'Could not load this product.'}</p><button type="button" className="button button-quiet" onClick={retry}><RefreshCw size={15} aria-hidden="true" /> {language === 'it' ? 'Riprova' : 'Try again'}</button></div>}
-      {!loading && !error && !product && <div className="catalog-state"><p>{language === 'it' ? 'Prodotto non trovato.' : 'Product not found.'}</p><Link to="/#catalogue" className="text-link"><ArrowLeft size={15} aria-hidden="true" /> {backLabel}</Link></div>}
+      {!loading && !error && !product && <div className="catalog-state"><p>{language === 'it' ? 'Prodotto non trovato.' : 'Product not found.'}</p><Link to="/?section=catalogue" className="text-link"><ArrowLeft size={15} aria-hidden="true" /> {backLabel}</Link></div>}
       {product && <>
-        <Link to="/#catalogue" className="back-link"><ArrowLeft size={15} aria-hidden="true" /> {backLabel}</Link>
+        <Link to="/?section=catalogue" className="back-link"><ArrowLeft size={15} aria-hidden="true" /> {backLabel}</Link>
         <div className="product-detail">
           <div className="product-gallery">
-            <div className="product-main-image">{product.images[selectedImage] && !imageFailed ? <img src={product.images[selectedImage]} alt={title} width="1000" height="1250" fetchPriority="high" onError={() => setImageFailed(true)} /> : <div className="product-image-fallback" aria-hidden="true" />}</div>
-            {product.images.length > 1 && <div className="product-thumbnails">{product.images.map((image, index) => <button type="button" key={image} className={selectedImage === index ? 'thumbnail thumbnail-active' : 'thumbnail'} onClick={() => { setSelectedImage(index); setImageFailed(false); }} aria-label={`${title} ${index + 1}`} aria-pressed={selectedImage === index}><img src={image} alt="" width="180" height="220" loading="lazy" onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }} /></button>)}</div>}
+            <div className="product-main-image">{product.images[selectedImage] && !imageFailed ? <LiquidImage src={product.images[selectedImage]} alt={title} width={1000} height={1250} fetchPriority="high" onError={() => setImageFailed(true)} /> : <div className="product-image-fallback" aria-hidden="true" />}</div>
+            {product.images.length > 1 && <div className="product-thumbnails">{product.images.map((image, index) => <button type="button" key={image} className={selectedImage === index ? 'thumbnail thumbnail-active' : 'thumbnail'} onClick={() => { setSelectedImage(index); setImageFailed(false); }} aria-label={`${title} ${index + 1}`} aria-pressed={selectedImage === index}><LiquidImage src={image} alt="" width={180} height={220} /></button>)}</div>}
           </div>
           <div className="product-detail-copy">
-            <p className="eyebrow">{product.category ?? 'Kay G. Hagler'}</p>
             <h1>{title}</h1>
             <p className="product-detail-price">{formatPrice(product.price, product.currency, language) || 'Price on request'}</p>
             <p className="product-description">{description.replace(/<[^>]*>/g, '')}</p>
