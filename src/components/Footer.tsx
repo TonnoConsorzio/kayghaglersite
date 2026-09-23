@@ -13,7 +13,6 @@ export default function Footer() {
         <div className="footer-main">
           <div>
             <LiquidImage src={siteConfig.site.logo} alt={siteConfig.site.name} width={150} height={32} />
-            <p>{siteConfig.site.tagline[language]}</p>
           </div>
           <div className="footer-links">
             <a href={`mailto:${siteConfig.footer.contactEmail}`}>{language === 'it' ? 'Contatti' : 'Contact'}</a>

@@ -25,6 +25,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      VITE_ECWID_STORE_ID: ${{ secrets.VITE_ECWID_STORE_ID || '141046752' }}
+      VITE_ECWID_PUBLIC_TOKEN: ${{ secrets.VITE_ECWID_PUBLIC_TOKEN }}
+      VITE_ECWID_CATALOG_PATH: https://app.ecwid.com/api/v3
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,6 +40,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Check Ecwid configuration
+        run: test -n "$VITE_ECWID_PUBLIC_TOKEN"
 
       - name: Build
         run: npm run build
