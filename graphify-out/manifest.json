@@ -1,0 +1,162 @@
+{
+  "metadata.json": {
+    "mtime": 1787059153.42265,
+    "ast_hash": "7dad2288d0188e14eddc7d84e6b8cce0",
+    "semantic_hash": "7dad2288d0188e14eddc7d84e6b8cce0"
+  },
+  "package.json": {
+    "mtime": 1787140028.426657,
+    "ast_hash": "fd30c5e4ddc61fb7daabdf3d61b1803a",
+    "semantic_hash": "fd30c5e4ddc61fb7daabdf3d61b1803a"
+  },
+  "scripts/test-ecwid.mjs": {
+    "mtime": 1787140498.1561193,
+    "ast_hash": "ac1e5ea48c9a1ed25e96fb03022d67b4",
+    "semantic_hash": "ac1e5ea48c9a1ed25e96fb03022d67b4"
+  },
+  "src/App.tsx": {
+    "mtime": 1787141054.9187324,
+    "ast_hash": "abf26738d7213d44f7e60f5b80fa277c",
+    "semantic_hash": "abf26738d7213d44f7e60f5b80fa277c"
+  },
+  "src/components/BlackHole.tsx": {
+    "mtime": 1787059153.423173,
+    "ast_hash": "5df0c67ccba555cc0134eb822eb1f360",
+    "semantic_hash": "5df0c67ccba555cc0134eb822eb1f360"
+  },
+  "src/components/Footer.tsx": {
+    "mtime": 1787141067.831469,
+    "ast_hash": "87c9282129f0455680a58af6872992d1",
+    "semantic_hash": "87c9282129f0455680a58af6872992d1"
+  },
+  "src/components/Hero.tsx": {
+    "mtime": 1787141054.6767373,
+    "ast_hash": "6838b62da5ca7d4bd5eda44551410940",
+    "semantic_hash": "6838b62da5ca7d4bd5eda44551410940"
+  },
+  "src/components/IntroOverlay.tsx": {
+    "mtime": 1787141266.8255649,
+    "ast_hash": "6355389bf8d3e51a64d836c26b50edfa",
+    "semantic_hash": "6355389bf8d3e51a64d836c26b50edfa"
+  },
+  "src/components/Introduction.tsx": {
+    "mtime": 1787141006.2447257,
+    "ast_hash": "210938b6e4d50d9bdb7b3c4a24eee66a",
+    "semantic_hash": "210938b6e4d50d9bdb7b3c4a24eee66a"
+  },
+  "src/components/LegalDocument.tsx": {
+    "mtime": 1787141161.2976274,
+    "ast_hash": "f12b0171af74acd1d778fe687694ff7c",
+    "semantic_hash": "f12b0171af74acd1d778fe687694ff7c"
+  },
+  "src/components/LiquidImage.tsx": {
+    "mtime": 1787128489.4438512,
+    "ast_hash": "551dc288cc4a0f7d9591503dba679fc5",
+    "semantic_hash": "551dc288cc4a0f7d9591503dba679fc5"
+  },
+  "src/components/Navbar.tsx": {
+    "mtime": 1790060759.587153,
+    "ast_hash": "febc22521694aecce0cfe1202fd105dc",
+    "semantic_hash": ""
+  },
+  "src/components/ProductCard.tsx": {
+    "mtime": 1787128521.5842125,
+    "ast_hash": "96426dd7ccc3e76c76e1e424c0518c23",
+    "semantic_hash": "96426dd7ccc3e76c76e1e424c0518c23"
+  },
+  "src/components/ProductCarousel.tsx": {
+    "mtime": 1787128547.0277069,
+    "ast_hash": "4c890b837832f1ca51db703e43767d40",
+    "semantic_hash": "4c890b837832f1ca51db703e43767d40"
+  },
+  "src/config/site.json": {
+    "mtime": 1787141291.7440777,
+    "ast_hash": "bc2bc9cf5d74ecbbfac93d7cabd8684b",
+    "semantic_hash": "bc2bc9cf5d74ecbbfac93d7cabd8684b"
+  },
+  "src/data/product-overrides.json": {
+    "mtime": 1787141266.6346328,
+    "ast_hash": "574a3b36e53f0603618c192b65476778",
+    "semantic_hash": "574a3b36e53f0603618c192b65476778"
+  },
+  "src/data/translations.json": {
+    "mtime": 1787141079.451232,
+    "ast_hash": "1f209192ff05888eaa477d288ac706bf",
+    "semantic_hash": "1f209192ff05888eaa477d288ac706bf"
+  },
+  "src/hooks/useCatalog.ts": {
+    "mtime": 1787059970.9795642,
+    "ast_hash": "b5cb06beeb0ef56992c787a75a9fe041",
+    "semantic_hash": "b5cb06beeb0ef56992c787a75a9fe041"
+  },
+  "src/i18n/LanguageContext.tsx": {
+    "mtime": 1787060372.2442489,
+    "ast_hash": "f0091aeeea36de024732d3523b87f783",
+    "semantic_hash": "f0091aeeea36de024732d3523b87f783"
+  },
+  "src/main.tsx": {
+    "mtime": 1787059153.4242513,
+    "ast_hash": "a9956568f0cb066c1567715fb66ff6b2",
+    "semantic_hash": "a9956568f0cb066c1567715fb66ff6b2"
+  },
+  "src/pages/HomePage.tsx": {
+    "mtime": 1787141054.3987432,
+    "ast_hash": "790db71a354fd478d045cae2b95ccac9",
+    "semantic_hash": "790db71a354fd478d045cae2b95ccac9"
+  },
+  "src/pages/ProductPage.tsx": {
+    "mtime": 1787128804.3525898,
+    "ast_hash": "334505f2c52b25b6307801a78aaa0383",
+    "semantic_hash": "334505f2c52b25b6307801a78aaa0383"
+  },
+  "src/services/ecwidClient.ts": {
+    "mtime": 1790060759.7541497,
+    "ast_hash": "85ee380da880870b912184b57c0d9f48",
+    "semantic_hash": ""
+  },
+  "src/types/catalog.ts": {
+    "mtime": 1787128458.540465,
+    "ast_hash": "57b8996f2ba7ad1ed452e1265777b508",
+    "semantic_hash": "57b8996f2ba7ad1ed452e1265777b508"
+  },
+  "src/vite-env.d.ts": {
+    "mtime": 1787060297.673794,
+    "ast_hash": "0352474ba2918efe13895edbc3780d94",
+    "semantic_hash": "0352474ba2918efe13895edbc3780d94"
+  },
+  "tsconfig.json": {
+    "mtime": 1787059153.4246123,
+    "ast_hash": "8827451c4e35790dd3f3538c265e7d15",
+    "semantic_hash": "8827451c4e35790dd3f3538c265e7d15"
+  },
+  "vite.config.ts": {
+    "mtime": 1787059153.4247217,
+    "ast_hash": "400784be009b0adb6f6c97f2992e4106",
+    "semantic_hash": "400784be009b0adb6f6c97f2992e4106"
+  },
+  ".github/workflows/deploy.yml": {
+    "mtime": 1787059153.4221702,
+    "ast_hash": "85b4d081a366152abfc60192f5e7506c",
+    "semantic_hash": ""
+  },
+  "AGENTS.md": {
+    "mtime": 1787128547.479698,
+    "ast_hash": "822c4fe34de3966618a76f6959cdb116",
+    "semantic_hash": ""
+  },
+  "design-system/kay-g-hagler/MASTER.md": {
+    "mtime": 1787059879.5603914,
+    "ast_hash": "81b6800e025a8a8eb3c4068d19c4929d",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1790060759.9171467,
+    "ast_hash": "d24979f9093ef500a9356386986300c3",
+    "semantic_hash": ""
+  },
+  "public/Logo.svg": {
+    "mtime": 1787059153.4227314,
+    "ast_hash": "b3b8cd3b6ef914c062c77b18fab8a097",
+    "semantic_hash": ""
+  }
+}

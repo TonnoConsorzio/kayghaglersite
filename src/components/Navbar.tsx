@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Globe, Menu, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
 import translations from '../data/translations.json';
 import siteConfig from '../config/site.json';
@@ -10,7 +10,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
+  const location = useLocation();
   const t = translations[language];
+  const section = new URLSearchParams(location.search).get('section');
+  const isHome = location.pathname === '/';
+  const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,15 +24,25 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') closeMenu();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  useEffect(() => closeMenu(), [location.pathname, location.search]);
+
   return <header className={`site-header ${scrolled ? 'site-header-scrolled' : ''}`}>
     <nav className="site-nav" aria-label="Primary navigation">
-      <Link to="/" className="brand-mark" aria-label={siteConfig.site.name} onClick={() => setMenuOpen(false)}>
+      <Link to="/" className="brand-mark" aria-label={siteConfig.site.name} onClick={closeMenu}>
         <LiquidImage src={siteConfig.site.logo} alt={siteConfig.site.name} width={150} height={32} loading="eager" />
       </Link>
       <div id="site-navigation" className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
-        <Link to="/" onClick={() => setMenuOpen(false)}>{t.nav.home ?? 'Home'}</Link>
-        <Link to="/?section=catalogue" onClick={() => setMenuOpen(false)}>{t.nav.catalogue ?? 'Catalogue'}</Link>
-        <Link to="/?section=introduction" onClick={() => setMenuOpen(false)}>{t.nav.introduction}</Link>
+        <Link to="/" onClick={closeMenu} className={isHome && !section ? 'nav-link-active' : ''} aria-current={isHome && !section ? 'page' : undefined}>{t.nav.home ?? 'Home'}</Link>
+        <Link to="/?section=catalogue" onClick={closeMenu} className={isHome && section === 'catalogue' ? 'nav-link-active' : ''} aria-current={isHome && section === 'catalogue' ? 'location' : undefined}>{t.nav.catalogue ?? 'Catalogue'}</Link>
+        <Link to="/?section=introduction" onClick={closeMenu} className={isHome && section === 'introduction' ? 'nav-link-active' : ''} aria-current={isHome && section === 'introduction' ? 'location' : undefined}>{t.nav.introduction}</Link>
       </div>
       <div className="nav-actions">
         <div className="language-switcher" aria-label="Language">

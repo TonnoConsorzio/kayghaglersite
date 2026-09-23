@@ -86,7 +86,26 @@ function applyOverride(product: Product): Product {
 }
 
 function uniqueImages(images: Array<string | undefined>): string[] {
-  return [...new Set(images.filter((image): image is string => Boolean(image)))];
+  return [...new Set(images.filter((image): image is string => Boolean(image && isSafeImageUrl(image))))];
+}
+
+function isSafeImageUrl(value: string): boolean {
+  if (value.startsWith('/') && !value.startsWith('//')) return true;
+  try {
+    return new URL(value).protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+function isSafeProductUrl(value?: string): string | undefined {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' ? url.toString() : undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 function normalizeProduct(product: EcwidProduct): Product {
@@ -111,7 +130,7 @@ function normalizeProduct(product: EcwidProduct): Product {
     currency: product.currency ?? config.site.currency,
     images,
     category: category?.nameTranslated?.en ?? category?.name,
-    url: product.url ?? product.productUrl,
+    url: isSafeProductUrl(product.url ?? product.productUrl),
     inStock: product.inStock,
     quantity: product.quantity,
     unlimited: product.unlimited,
@@ -178,6 +197,21 @@ export function formatPrice(price: number | undefined, currency: string, languag
     style: 'currency',
     currency,
   }).format(price);
+}
+
+export function getCheckoutUrl(productId: string): string | undefined {
+  const id = Number(productId);
+  if (!Number.isSafeInteger(id) || id <= 0 || typeof window === 'undefined') return undefined;
+
+  const pathname = window.location.pathname;
+  const directory = pathname.endsWith('/')
+    ? pathname
+    : pathname.endsWith('.html')
+      ? pathname.slice(0, pathname.lastIndexOf('/') + 1)
+      : `${pathname}/`;
+  const storePage = new URL(`${directory}store.html`, window.location.origin).toString();
+  const cart = encodeURIComponent(JSON.stringify({ gotoCheckout: true, products: [{ id, quantity: 1 }] }));
+  return `${storePage}#!/~/cart/create=${cart}`;
 }
 
 export function resetCatalogCache() {

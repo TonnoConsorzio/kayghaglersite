@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useLanguage } from '../i18n/LanguageContext';
 import { useCatalog } from '../hooks/useCatalog';
-import { formatPrice, getLocalizedValue } from '../services/ecwidClient';
+import { formatPrice, getCheckoutUrl, getLocalizedValue } from '../services/ecwidClient';
 import siteConfig from '../config/site.json';
 import LiquidImage from '../components/LiquidImage';
 
@@ -40,7 +40,7 @@ export default function ProductPage() {
 
   const title = product ? getLocalizedValue(product.title, language) : '';
   const description = product ? getLocalizedValue(product.description, language) : '';
-  const purchaseUrl = product?.url;
+  const purchaseUrl = product ? getCheckoutUrl(product.id) : undefined;
   const backLabel = language === 'it' ? 'Torna al catalogo' : 'Back to catalogue';
 
   return <div className="page-shell">
@@ -60,7 +60,7 @@ export default function ProductPage() {
             <h1>{title}</h1>
             <p className="product-detail-price">{formatPrice(product.price, product.currency, language) || 'Price on request'}</p>
             <p className="product-description">{description.replace(/<[^>]*>/g, '')}</p>
-            {purchaseUrl ? <a href={purchaseUrl} className="button button-primary" target="_blank" rel="noopener noreferrer">{language === 'it' ? 'Acquista su Ecwid' : 'Buy on Ecwid'} <ArrowUpRight size={17} aria-hidden="true" /></a> : <p className="product-note">{language === 'it' ? 'Acquisto online in arrivo.' : 'Online checkout coming soon.'}</p>}
+            {purchaseUrl ? <a href={purchaseUrl} className="button button-primary" target="_blank" rel="noopener noreferrer">{language === 'it' ? 'Vai al pagamento' : 'Go to checkout'} <ArrowUpRight size={17} aria-hidden="true" /></a> : <p className="product-note">{language === 'it' ? 'Acquisto online in arrivo.' : 'Online checkout coming soon.'}</p>}
             {product.inStock === false && <p className="product-note">{language === 'it' ? 'Al momento non disponibile.' : 'Currently unavailable.'}</p>}
           </div>
         </div>

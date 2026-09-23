@@ -1,0 +1,326 @@
+{
+  "communities": {
+    "0": [
+      "src_components_footer",
+      "src_components_footer_footer",
+      "src_components_hero",
+      "src_components_hero_hero",
+      "src_components_legaldocument",
+      "src_components_legaldocument_fill",
+      "src_components_legaldocument_legaldocument",
+      "src_components_legaldocument_legaldocumentpage",
+      "src_components_legaldocument_localizedcopy",
+      "src_components_liquidimage",
+      "src_components_liquidimage_liquidimage",
+      "src_components_liquidimage_props",
+      "src_components_navbar",
+      "src_components_navbar_navbar",
+      "src_components_productcard",
+      "src_components_productcard_imagefallback",
+      "src_components_productcard_productcard",
+      "src_components_productcarousel",
+      "src_components_productcarousel_productcarousel",
+      "src_components_productcarousel_props",
+      "src_i18n_languagecontext",
+      "src_i18n_languagecontext_language",
+      "src_i18n_languagecontext_languagecontext",
+      "src_i18n_languagecontext_languagecontexttype",
+      "src_i18n_languagecontext_languageprovider",
+      "src_i18n_languagecontext_uselanguage",
+      "src_main",
+      "src_pages_productpage",
+      "src_pages_productpage_productpage",
+      "src_services_ecwidclient_formatprice",
+      "src_services_ecwidclient_getlocalizedvalue"
+    ],
+    "1": [
+      "autoprefixer",
+      "esbuild",
+      "package",
+      "package_devdependencies",
+      "package_devdependencies_autoprefixer",
+      "package_devdependencies_esbuild",
+      "package_devdependencies_tailwindcss",
+      "package_devdependencies_tsx",
+      "package_devdependencies_types_express",
+      "package_devdependencies_types_node",
+      "package_devdependencies_typescript",
+      "package_name",
+      "package_private",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_clean",
+      "package_scripts_dev",
+      "package_scripts_lint",
+      "package_scripts_preview",
+      "package_scripts_test_ecwid",
+      "package_type",
+      "package_version",
+      "tailwindcss",
+      "tsx",
+      "types_express",
+      "types_node",
+      "typescript"
+    ],
+    "2": [
+      "dotenv",
+      "express",
+      "google_genai",
+      "lucide_react",
+      "motion",
+      "package_dependencies",
+      "package_dependencies_dotenv",
+      "package_dependencies_express",
+      "package_dependencies_google_genai",
+      "package_dependencies_lucide_react",
+      "package_dependencies_motion",
+      "package_dependencies_react",
+      "package_dependencies_react_dom",
+      "package_dependencies_react_router_dom",
+      "package_dependencies_tailwindcss_vite",
+      "package_dependencies_vite",
+      "package_dependencies_vitejs_plugin_react",
+      "package_devdependencies_vite",
+      "react",
+      "react_dom",
+      "react_router_dom",
+      "tailwindcss_vite",
+      "vite",
+      "vitejs_plugin_react"
+    ],
+    "3": [
+      "src_hooks_usecatalog",
+      "src_services_ecwidclient",
+      "src_services_ecwidclient_applyoverride",
+      "src_services_ecwidclient_config",
+      "src_services_ecwidclient_ecwid",
+      "src_services_ecwidclient_ecwidproduct",
+      "src_services_ecwidclient_ecwidresponse",
+      "src_services_ecwidclient_fetchecwidproducts",
+      "src_services_ecwidclient_getcatalogproducts",
+      "src_services_ecwidclient_getlocalproducts",
+      "src_services_ecwidclient_localmodules",
+      "src_services_ecwidclient_normalizeproduct",
+      "src_services_ecwidclient_overrides",
+      "src_services_ecwidclient_resetcatalogcache",
+      "src_services_ecwidclient_textmap",
+      "src_services_ecwidclient_uniqueimages",
+      "src_types_catalog",
+      "src_types_catalog_catalogstate",
+      "src_types_catalog_language",
+      "src_types_catalog_localizedtext",
+      "src_types_catalog_product",
+      "src_types_catalog_productoverride"
+    ],
+    "4": [
+      "ref_dom",
+      "ref_dom_iterable",
+      "ref_es2022",
+      "tsconfig",
+      "tsconfig_compileroptions",
+      "tsconfig_compileroptions_allowimportingtsextensions",
+      "tsconfig_compileroptions_allowjs",
+      "tsconfig_compileroptions_experimentaldecorators",
+      "tsconfig_compileroptions_isolatedmodules",
+      "tsconfig_compileroptions_jsx",
+      "tsconfig_compileroptions_lib",
+      "tsconfig_compileroptions_module",
+      "tsconfig_compileroptions_moduledetection",
+      "tsconfig_compileroptions_moduleresolution",
+      "tsconfig_compileroptions_noemit",
+      "tsconfig_compileroptions_paths",
+      "tsconfig_compileroptions_skiplibcheck",
+      "tsconfig_compileroptions_target",
+      "tsconfig_compileroptions_usedefineforclassfields"
+    ],
+    "5": [
+      "src_app",
+      "src_app_app",
+      "src_app_scrolltosection",
+      "src_app_scrolltotop",
+      "src_components_introduction",
+      "src_components_introduction_introduction",
+      "src_components_introduction_striphtml",
+      "src_hooks_usecatalog_usecatalog",
+      "src_pages_homepage",
+      "src_pages_homepage_homepage",
+      "src_services_ecwidclient_getlatestproducts"
+    ],
+    "6": [
+      "src_components_blackhole",
+      "src_components_blackhole_blackhole",
+      "src_components_blackhole_centre",
+      "src_components_blackhole_component_defaults",
+      "src_components_blackhole_default_centre",
+      "src_components_blackhole_defaults",
+      "src_components_blackhole_particle",
+      "src_components_blackhole_props",
+      "src_components_introoverlay",
+      "src_components_introoverlay_introoverlay",
+      "src_components_introoverlay_phase"
+    ],
+    "7": [
+      "scripts_test_ecwid",
+      "scripts_test_ecwid_params"
+    ],
+    "8": [
+      "src_vite_env_d"
+    ],
+    "9": [
+      "vite_config"
+    ]
+  },
+  "cohesion": {
+    "0": 0.15053763440860216,
+    "1": 0.07407407407407407,
+    "2": 0.08333333333333333,
+    "3": 0.15584415584415584,
+    "4": 0.10526315789473684,
+    "5": 0.2727272727272727,
+    "6": 0.18181818181818182,
+    "7": 1.0,
+    "8": 1.0,
+    "9": 1.0
+  },
+  "gods": [
+    {
+      "id": "src_i18n_languagecontext_uselanguage",
+      "label": "useLanguage()",
+      "degree": 17
+    },
+    {
+      "id": "tsconfig_compileroptions",
+      "label": "compilerOptions",
+      "degree": 15
+    },
+    {
+      "id": "src_services_ecwidclient_getlocalizedvalue",
+      "label": "getLocalizedValue()",
+      "degree": 9
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 7
+    },
+    {
+      "id": "src_types_catalog_product",
+      "label": "Product",
+      "degree": 7
+    },
+    {
+      "id": "src_components_liquidimage_liquidimage",
+      "label": "LiquidImage()",
+      "degree": 6
+    },
+    {
+      "id": "src_hooks_usecatalog_usecatalog",
+      "label": "useCatalog()",
+      "degree": 6
+    },
+    {
+      "id": "src_pages_productpage_productpage",
+      "label": "ProductPage()",
+      "degree": 6
+    },
+    {
+      "id": "src_components_footer_footer",
+      "label": "Footer()",
+      "degree": 5
+    },
+    {
+      "id": "src_components_introduction_introduction",
+      "label": "Introduction()",
+      "degree": 5
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Introduction()",
+      "target": "useLanguage()",
+      "source_files": [
+        "src/components/Introduction.tsx",
+        "src/i18n/LanguageContext.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "Introduction()",
+      "target": "getLocalizedValue()",
+      "source_files": [
+        "src/components/Introduction.tsx",
+        "src/services/ecwidClient.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    },
+    {
+      "source": "Navbar()",
+      "target": "useLanguage()",
+      "source_files": [
+        "src/components/Navbar.tsx",
+        "src/i18n/LanguageContext.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `Navbar()` unexpectedly reaches hub `useLanguage()`"
+    },
+    {
+      "source": "ProductCarousel()",
+      "target": "useLanguage()",
+      "source_files": [
+        "src/components/ProductCarousel.tsx",
+        "src/i18n/LanguageContext.tsx"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "peripheral node `ProductCarousel()` unexpectedly reaches hub `useLanguage()`"
+    },
+    {
+      "source": "useCatalog()",
+      "target": "getCatalogProducts()",
+      "source_files": [
+        "src/hooks/useCatalog.ts",
+        "src/services/ecwidClient.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `dependencies` connect `dependencies` to `devDependencies`?",
+      "why": "High betweenness centrality (0.074) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `devDependencies` connect `devDependencies` to `dependencies`?",
+      "why": "High betweenness centrality (0.057) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `name`, `private`, `version` to the rest of the system?",
+      "why": "64 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `devDependencies` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.07407407407407407 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `dependencies` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.08333333333333333 - nodes in this community are weakly interconnected."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `compilerOptions` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.10526315789473684 - nodes in this community are weakly interconnected."
+    }
+  ]
+}
