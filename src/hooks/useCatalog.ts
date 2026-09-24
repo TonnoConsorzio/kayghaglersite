@@ -1,20 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getCatalogProducts } from '../services/ecwidClient';
+import { getCachedCatalogProducts, getCatalogProducts } from '../services/ecwidClient';
 import type { CatalogState, Product } from '../types/catalog';
 
 export function useCatalog(): CatalogState {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState<Product[]>(() => getCachedCatalogProducts());
+  const [loading, setLoading] = useState(() => getCachedCatalogProducts().length === 0);
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
+    setLoading(products.length === 0);
     getCatalogProducts(attempt > 0).then((nextProducts) => {
       if (!active) return;
       setProducts(nextProducts);
-      setError(null);
+      setError(nextProducts.length ? null : 'catalog-unavailable');
     }).catch(() => {
       if (active) setError('catalog-unavailable');
     }).finally(() => {

@@ -66,6 +66,7 @@ const ecwid = {
 const overrides = productOverrides as Record<string, ProductOverride>;
 
 let catalogRequest: Promise<Product[]> | null = null;
+let catalogProducts: Product[] = [];
 
 function textMap(value?: string, translated?: Record<string, string>): LocalizedText {
   return { ...(value ? { en: value } : {}), ...(translated ?? {}) };
@@ -171,10 +172,26 @@ async function fetchEcwidProducts(): Promise<Product[]> {
 
 export function getCatalogProducts(force = false): Promise<Product[]> {
   if (force || !catalogRequest) {
-    catalogRequest = fetchEcwidProducts().then((products) => products.length ? products : getLocalProducts()).catch(() => getLocalProducts());
+    catalogRequest = fetchEcwidProducts()
+      .then((products) => products.length ? products : getLocalProducts())
+      .then((products) => {
+        catalogProducts = products;
+        return products;
+      })
+      .catch(() => {
+        const localProducts = getLocalProducts();
+        catalogProducts = localProducts;
+        if (!localProducts.length) catalogRequest = null;
+        return localProducts;
+      });
   }
   return catalogRequest;
 }
+export function getCachedCatalogProducts(): Product[] {
+  return catalogProducts;
+}
+
+
 
 export function getLatestProducts(products: Product[], limit: number, language?: Language): Product[] {
   return [...products]
@@ -236,4 +253,5 @@ export function getCheckoutUrl(productId: string): string | undefined {
 
 export function resetCatalogCache() {
   catalogRequest = null;
+  catalogProducts = [];
 }

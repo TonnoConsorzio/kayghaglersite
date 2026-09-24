@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, RefreshCw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
@@ -19,6 +19,7 @@ export default function HomePage() {
       <Navbar />
       <main id="main-content" className="page-content">
         <Hero product={featured[0]} loading={catalog.loading} />
+        {catalog.error && !catalog.products.length && <div className="catalog-state catalog-state-error" role="alert"><p>{language === 'it' ? 'Il catalogo non è disponibile.' : 'The catalogue is unavailable.'}</p><button type="button" className="button button-quiet" onClick={catalog.retry}><RefreshCw size={15} aria-hidden="true" /> {language === 'it' ? 'Riprova' : 'Try again'}</button></div>}
         {!catalog.loading && editions.length > 0 && <section className="home-editions" aria-label={language === 'it' ? 'Edizioni disponibili' : 'Available editions'}>
           <div className="home-editions-heading"><span>{language === 'it' ? 'Edizioni' : 'Editions'}</span><span>{editions.length} {language === 'it' ? 'titoli' : 'titles'}</span></div>
           <div className="home-editions-grid">
