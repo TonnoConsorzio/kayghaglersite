@@ -17,33 +17,10 @@
         "en": "View book",
         "it": "Vedi il libro"
       }
-    },
-    "featuredProducts": {
-      "enabled": true,
-      "mode": "latest",
-      "limit": 4,
-      "title": {
-        "en": "Ideas worth keeping close.",
-        "it": "Idee da tenere vicino."
-      },
-      "description": {
-        "en": "A small selection from the current Ecwid catalogue.",
-        "it": "Una selezione dal catalogo Ecwid attuale."
-      }
-    },
-    "introduction": {
-      "title": {
-        "en": "Introduction",
-        "it": "Introduzione"
-      },
-      "fallback": {
-        "en": "A first passage into the book. Read the description from the catalogue, then follow the thread further.",
-        "it": "Un primo passaggio dentro il libro. Leggi la descrizione del catalogo, poi segui il filo più avanti."
-      }
     }
   },
   "footer": {
-    "contactEmail": "hello@kayghagler.com",
+    "contactEmail": "nap.61@hotmail.com",
     "copyright": {
       "en": "© 2026 Kay G. Hagler. All rights reserved.",
       "it": "© 2026 Kay G. Hagler. Tutti i diritti riservati."
@@ -57,7 +34,7 @@
     "seller": {
       "name": "[LEGAL SELLER NAME]",
       "address": "[LEGAL SELLER ADDRESS]",
-      "email": "hello@kayghagler.com"
+      "email": "nap.61@hotmail.com"
     },
     "privacy": {
       "title": {

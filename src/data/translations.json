@@ -1,16 +1,12 @@
 {
   "en": {
     "nav": {
-      "home": "Home",
-      "catalogue": "Catalogue",
-      "introduction": "Introduction"
+      "home": "Home"
     }
   },
   "it": {
     "nav": {
-      "home": "Home",
-      "catalogue": "Catalogo",
-      "introduction": "Introduzione"
+      "home": "Home"
     }
   }
 }

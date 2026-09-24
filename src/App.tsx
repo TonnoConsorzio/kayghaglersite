@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation, useSearchParams } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import IntroOverlay from './components/IntroOverlay';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
@@ -14,27 +14,8 @@ function ScrollToTop() {
   return null;
 }
 
-function ScrollToSection({ ready }: { ready: boolean }) {
-  const [searchParams] = useSearchParams();
-  const section = searchParams.get('section') ?? new URLSearchParams(window.location.search).get('section');
-
-  useEffect(() => {
-    if (!ready || !section) return;
-    const timer = window.setTimeout(() => {
-      const target = document.getElementById(section);
-      if (!target) return;
-      const top = target.getBoundingClientRect().top + window.scrollY - 88;
-      window.scrollTo({ top, behavior: 'auto' });
-    }, 120);
-    return () => window.clearTimeout(timer);
-  }, [ready, section]);
-
-  return null;
-}
-
 export default function App() {
-  const linkedSection = new URLSearchParams(window.location.search).has('section') || new URLSearchParams(window.location.hash.split('?')[1] ?? '').has('section');
-  const [introComplete, setIntroComplete] = useState(!siteConfig.intro.enabled || linkedSection);
+  const [introComplete, setIntroComplete] = useState(!siteConfig.intro.enabled);
 
   useEffect(() => {
     if (!introComplete) return;
@@ -73,7 +54,6 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <ScrollToSection ready={introComplete} />
       <div className="selection:bg-brand-500 selection:text-white">
         <a className="skip-link" href="#main-content">Skip to content</a>
         {!introComplete && (

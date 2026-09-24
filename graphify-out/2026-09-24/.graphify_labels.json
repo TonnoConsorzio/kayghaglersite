@@ -4,6 +4,7 @@
   "2": "dependencies",
   "3": "ecwidClient.ts",
   "4": "compilerOptions",
+  "5": "HomePage.tsx",
   "6": "BlackHole.tsx",
   "7": "test-ecwid.mjs",
   "8": "vite-env.d.ts",

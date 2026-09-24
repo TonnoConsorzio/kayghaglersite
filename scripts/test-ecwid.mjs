@@ -17,7 +17,7 @@ if (!storeId || !publicToken) {
 }
 
 const params = new URLSearchParams({
-  limit: '1',
+  limit: '100',
   visibleInStorefront: 'true',
   responseFields: 'total,items(id,name,price)',
 });
@@ -29,4 +29,4 @@ if (!response.ok) throw new Error(`Ecwid request failed: HTTP ${response.status}
 const data = await response.json();
 if (!Array.isArray(data.items)) throw new Error('Ecwid response missing items array.');
 
-console.log(`Ecwid live check passed: ${data.items.length} product returned.`);
+console.log(`Ecwid live check passed: ${data.items.length} products returned.`);

@@ -1,11 +1,14 @@
 {
   "857519771": {
+    "language": "en",
     "title": {
       "en": "1162 round's to the hell and back"
-    },
-    "description": {
-      "en": "A book about a journey into the dark and the way back. Open it for a first step into 1162 Rounds Senza Respiro.",
-      "it": "Un libro su un viaggio dentro il buio e sulla strada del ritorno. Aprilo per il primo passo in 1162 Rounds Senza Respiro."
+    }
+  },
+  "866966821": {
+    "language": "it",
+    "title": {
+      "it": "1162 Rounds Senza Respiro | Andata e ritorno dall'inferno"
     }
   }
 }

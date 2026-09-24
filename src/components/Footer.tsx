@@ -1,6 +1,5 @@
 import { ArrowUp } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import translations from '../data/translations.json';
 import siteConfig from '../config/site.json';
 import { Link } from 'react-router-dom';
 import LiquidImage from './LiquidImage';
@@ -16,7 +15,6 @@ export default function Footer() {
           </div>
           <div className="footer-links">
             <a href={`mailto:${siteConfig.footer.contactEmail}`}>{language === 'it' ? 'Contatti' : 'Contact'}</a>
-            <Link to="/?section=introduction">{translations[language].nav.introduction}</Link>
             <Link to="/privacy">{language === 'it' ? 'Privacy' : 'Privacy policy'}</Link>
             <Link to="/terms">{language === 'it' ? 'Termini' : 'Terms'}</Link>
           </div>

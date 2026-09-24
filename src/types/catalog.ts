@@ -3,6 +3,7 @@ export type Language = 'it' | 'en';
 export type LocalizedText = Partial<Record<Language | string, string>>;
 
 export type ProductOverride = {
+  language?: Language;
   title?: LocalizedText;
   description?: LocalizedText;
   price?: number;
@@ -13,6 +14,7 @@ export type ProductOverride = {
 
 export interface Product {
   id: string;
+  language?: Language;
   title: LocalizedText;
   description: LocalizedText;
   price?: number;

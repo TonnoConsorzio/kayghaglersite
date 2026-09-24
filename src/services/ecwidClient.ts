@@ -68,7 +68,7 @@ const overrides = productOverrides as Record<string, ProductOverride>;
 let catalogRequest: Promise<Product[]> | null = null;
 
 function textMap(value?: string, translated?: Record<string, string>): LocalizedText {
-  return { ...(translated ?? {}), ...(value ? { en: value } : {}) };
+  return { ...(value ? { en: value } : {}), ...(translated ?? {}) };
 }
 
 function applyOverride(product: Product): Product {
@@ -76,6 +76,7 @@ function applyOverride(product: Product): Product {
   if (!override) return product;
   return {
     ...product,
+    language: override.language ?? product.language,
     title: { ...product.title, ...override.title },
     description: { ...product.description, ...override.description },
     price: override.price ?? product.price,
@@ -175,9 +176,9 @@ export function getCatalogProducts(force = false): Promise<Product[]> {
   return catalogRequest;
 }
 
-export function getLatestProducts(products: Product[], limit: number): Product[] {
+export function getLatestProducts(products: Product[], limit: number, language?: Language): Product[] {
   return [...products]
-    .filter((product) => !product.isHidden)
+    .filter((product) => !product.isHidden && (!language || !product.language || product.language === language))
     .sort((a, b) => {
       const aTime = Date.parse(a.created ?? a.updated ?? '') || 0;
       const bTime = Date.parse(b.created ?? b.updated ?? '') || 0;
@@ -189,6 +190,25 @@ export function getLatestProducts(products: Product[], limit: number): Product[]
 export function getLocalizedValue(value: LocalizedText | undefined, language: Language): string {
   if (!value) return '';
   return value[language] ?? value.en ?? Object.values(value)[0] ?? '';
+}
+
+export function stripHtml(value: string): string {
+  return value.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+export function sanitizeRichText(value: string): string {
+  if (typeof DOMParser === 'undefined') return stripHtml(value);
+  const document = new DOMParser().parseFromString(`<div>${value}</div>`, 'text/html');
+  const allowedTags = new Set(['DIV', 'P', 'STRONG', 'EM', 'BR', 'UL', 'OL', 'LI']);
+  document.body.querySelectorAll('script, style, iframe, object, embed, form').forEach((node) => node.remove());
+  document.body.querySelectorAll('*').forEach((node) => {
+    if (!allowedTags.has(node.tagName)) {
+      node.replaceWith(...Array.from(node.childNodes));
+      return;
+    }
+    Array.from(node.attributes).forEach((attribute) => node.removeAttribute(attribute.name));
+  });
+  return document.body.firstElementChild?.innerHTML ?? '';
 }
 
 export function formatPrice(price: number | undefined, currency: string, language: Language): string {

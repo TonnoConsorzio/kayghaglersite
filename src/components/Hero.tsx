@@ -3,16 +3,16 @@ import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Link } from 'react-router-dom';
 import siteConfig from '../config/site.json';
-import { getLocalizedValue } from '../services/ecwidClient';
+import { getLocalizedValue, stripHtml } from '../services/ecwidClient';
 import type { Product } from '../types/catalog';
 import LiquidImage from './LiquidImage';
 
 export default function Hero({ product, loading = false }: { product?: Product; loading?: boolean }) {
   const { language } = useLanguage();
   const [imageFailed, setImageFailed] = useState(false);
-  if (!product) return <section className={`hero hero-empty ${loading ? 'hero-loading' : ''}`} aria-live="polite"><p>{loading ? (language === 'it' ? 'Caricamento libro…' : 'Loading book…') : (language === 'it' ? 'Il catalogo sta arrivando.' : 'The catalogue is on its way.')}</p></section>;
-  const title = getLocalizedValue(product.title, language);
-  const description = getLocalizedValue(product.description, language);
+  if (!product) return <section className={`hero hero-empty ${loading ? 'hero-loading' : ''}`} aria-live="polite"><p>{loading ? (language === 'it' ? 'Caricamento libro…' : 'Loading book…') : (language === 'it' ? 'Nessun libro disponibile.' : 'No book available.')}</p></section>;
+  const title = stripHtml(getLocalizedValue(product.title, language));
+  const description = stripHtml(getLocalizedValue(product.description, language));
   const imageUrl = product.images[0];
   const heroCopy = siteConfig.homepage.hero;
 

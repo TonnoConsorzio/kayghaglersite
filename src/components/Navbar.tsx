@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Globe, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../i18n/LanguageContext';
-import translations from '../data/translations.json';
 import siteConfig from '../config/site.json';
 import LiquidImage from './LiquidImage';
 
@@ -11,8 +10,6 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { language, setLanguage } = useLanguage();
   const location = useLocation();
-  const t = translations[language];
-  const section = new URLSearchParams(location.search).get('section');
   const isHome = location.pathname === '/';
   const closeMenu = () => setMenuOpen(false);
 
@@ -40,9 +37,7 @@ export default function Navbar() {
         <LiquidImage src={siteConfig.site.logo} alt={siteConfig.site.name} width={150} height={32} loading="eager" />
       </Link>
       <div id="site-navigation" className={`nav-links ${menuOpen ? 'nav-links-open' : ''}`}>
-        <Link to="/" onClick={closeMenu} className={isHome && !section ? 'nav-link-active' : ''} aria-current={isHome && !section ? 'page' : undefined}>{t.nav.home ?? 'Home'}</Link>
-        <Link to="/?section=catalogue" onClick={closeMenu} className={isHome && section === 'catalogue' ? 'nav-link-active' : ''} aria-current={isHome && section === 'catalogue' ? 'location' : undefined}>{t.nav.catalogue ?? 'Catalogue'}</Link>
-        <Link to="/?section=introduction" onClick={closeMenu} className={isHome && section === 'introduction' ? 'nav-link-active' : ''} aria-current={isHome && section === 'introduction' ? 'location' : undefined}>{t.nav.introduction}</Link>
+        <Link to="/" onClick={closeMenu} className={isHome ? 'nav-link-active' : ''} aria-current={isHome ? 'page' : undefined}>Home</Link>
       </div>
       <div className="nav-actions">
         <div className="language-switcher" aria-label="Language">
