@@ -13,6 +13,10 @@
   },
   "homepage": {
     "hero": {
+      "description": {
+        "en": "I dedicate this book to my husband, Marvelous Marvin Hagler.\n\nThis is the story of what remains when all seems lost. The voice that breaks through even when you are left breathless, rising again not because it was spared, but because it refused to disappear.",
+        "it": "Dedico questo libro a mio marito, Marvelous Marvin Hagler.\n\nQuesta è la storia di ciò che resta quando tutto sembra perduto. La voce che si fa strada anche quando rimani senza respiro, rialzandosi non perché sia stata risparmiata, ma perché si è rifiutata di scomparire."
+      },
       "button": {
         "en": "View book",
         "it": "Vedi il libro"
@@ -89,50 +93,36 @@
         "it": "Termini e condizioni"
       },
       "intro": {
-        "en": "These terms apply to online sales of books made through this site and the Ecwid checkout.",
-        "it": "Questi termini si applicano alla vendita online di libri effettuata tramite questo sito e il checkout Ecwid."
+        "en": "On this website you have access to information, tools, resources, and products of the book “1162 Round’s to Hell and Back”, subtitle “Without Breath”.",
+        "it": "Su questo sito web è possibile accedere a informazioni, strumenti, risorse e prodotti relativi al libro “1162 Rounds senza respiro (Andata e ritorno all’inferno)”."
       },
       "sections": [
         {
-          "heading": { "en": "Seller and orders", "it": "Venditore e ordini" },
+          "heading": { "en": "Ownership and intellectual property", "it": "Proprietà e proprietà intellettuale" },
           "paragraphs": {
-            "en": ["The seller is {{sellerName}}, {{sellerAddress}}, contactable at {{sellerEmail}}. An order becomes binding when Ecwid confirms it and payment is accepted. Product availability, price, taxes and shipping costs appear at checkout before payment."],
-            "it": ["Il venditore è {{sellerName}}, {{sellerAddress}}, contattabile a {{sellerEmail}}. L'ordine diventa vincolante quando Ecwid lo conferma e il pagamento viene accettato. Disponibilità, prezzo, imposte e costi di spedizione sono mostrati prima del pagamento."]
+            "en": ["The book and the domain kghteam.com are registered and owned by K.G.H. Copying or duplicating any material or details on the site is strictly prohibited and punishable by law.", "The trademark is registered and may not be copied or used for any reason whatsoever. Illegal use of the mark is punishable by law. All content and material displayed regarding the book—including the title, subtitle, photos, text, cover and story—are registered, and no one is authorized to use them without written permission from the owner."],
+            "it": ["Il libro e il dominio kghteam.com sono registrati e di proprietà di K.G.H. La copia o la duplicazione di qualsiasi materiale o contenuto presente sul sito è severamente vietata e punibile a norma di legge.", "Il marchio è registrato e non può essere copiato o utilizzato per alcun motivo. L'uso illecito del marchio è punibile a norma di legge. Tutti i contenuti e i materiali relativi al libro—titolo, sottotitolo, fotografie, testi, copertina e storia—sono registrati; nessuno è autorizzato a utilizzarli senza il consenso scritto del proprietario."]
           }
         },
         {
-          "heading": { "en": "Books and content", "it": "Libri e contenuti" },
+          "heading": { "en": "Orders and payment", "it": "Ordini e pagamento" },
           "paragraphs": {
-            "en": ["We describe each book with reasonable care. Covers, colours and layout may vary slightly from the images on screen. Text and images on this site remain protected by applicable intellectual-property laws."],
-            "it": ["Descriviamo ogni libro con ragionevole accuratezza. Copertine, colori e impaginazione possono variare leggermente rispetto alle immagini visualizzate. Testi e immagini del sito restano protetti dalle norme applicabili sulla proprietà intellettuale."]
+            "en": ["Orders are processed through Ecwid, which provides a secure method for payment by credit card. If your credit card is declined, please contact your credit card issuer. Personal data will be processed by authorized third parties exclusively to facilitate and complete the payment transaction."],
+            "it": ["L'elaborazione degli ordini avviene tramite Ecwid, che offre una modalità sicura per il pagamento con carta di credito. In caso di rifiuto della carta di credito, si prega di contattare l'istituto emittente. I dati personali saranno trattati da terze parti autorizzate esclusivamente per agevolare e completare la transazione di pagamento."]
           }
         },
         {
-          "heading": { "en": "Delivery", "it": "Spedizione" },
+          "heading": { "en": "Shipping and availability", "it": "Spedizione e disponibilità" },
           "paragraphs": {
-            "en": ["We ship to the destinations shown at Ecwid checkout. Delivery estimates are indicative and may change because of carrier delays, customs or events outside our control. We will use the contact details in the order to communicate material problems."],
-            "it": ["Spediamo verso le destinazioni mostrate nel checkout Ecwid. I tempi indicati sono stimati e possono cambiare per ritardi del corriere, dogana o eventi fuori dal nostro controllo. Useremo i dati dell'ordine per comunicare problemi rilevanti."]
+            "en": ["We cannot issue a refund for a lost item. All books shipped will be sent by registered mail, and we can provide a customs number if you need it so you can track your item. Shipping costs will be determined automatically during checkout."],
+            "it": ["Non è possibile emettere rimborsi per articoli smarriti. Tutte le spedizioni vengono effettuate tramite servizio sicuro al fine di garantire integrità e affidabilità del recapito. Su richiesta dell’acquirente, forniamo il numero di tracciamento doganale, utile per verificare in tempo reale lo stato della spedizione. Le spese di spedizione verranno calcolate automaticamente al momento della scelta del metodo di pagamento."]
           }
         },
         {
-          "heading": { "en": "Withdrawal, returns and legal guarantee", "it": "Recesso, resi e garanzia legale" },
+          "heading": { "en": "Questions and limited edition", "it": "Domande edizione limitata" },
           "paragraphs": {
-            "en": ["For standard physical books sold to consumers in the European Union, the statutory withdrawal period generally lasts 14 days from delivery, subject to applicable law and its exceptions. Contact {{sellerEmail}} before returning an item and follow the return instructions. Return shipping is normally paid by the customer unless the law or the seller says otherwise.", "We do not offer discretionary refunds outside the statutory withdrawal rights, remedies for damaged or non-conforming goods, or other rights that cannot legally be excluded. Nothing in these terms limits mandatory consumer protection."],
-            "it": ["Per i libri fisici standard venduti a consumatori nell'Unione Europea, il termine legale di recesso dura in genere 14 giorni dalla consegna, salvo legge applicabile ed eventuali eccezioni. Contatta {{sellerEmail}} prima di restituire un articolo e segui le istruzioni per il reso. Il costo della restituzione è normalmente a carico del cliente, salvo diversa previsione di legge o del venditore.", "Non offriamo rimborsi discrezionali fuori dai diritti di recesso previsti dalla legge, dai rimedi per prodotti danneggiati o non conformi e dagli altri diritti inderogabili. Nessuna clausola limita le tutele obbligatorie del consumatore."]
-          }
-        },
-        {
-          "heading": { "en": "Damaged or incorrect books", "it": "Libri danneggiati o non conformi" },
-          "paragraphs": {
-            "en": ["If a book arrives damaged, defective or materially different from the order, contact {{sellerEmail}} with the order number and photographs. We will assess the request and provide the remedy required by applicable consumer law."],
-            "it": ["Se un libro arriva danneggiato, difettoso o sostanzialmente diverso dall'ordine, contatta {{sellerEmail}} indicando il numero d'ordine e allegando fotografie. Valuteremo la richiesta e forniremo il rimedio previsto dalla legge applicabile."]
-          }
-        },
-        {
-          "heading": { "en": "Applicable law", "it": "Legge applicabile" },
-          "paragraphs": {
-            "en": ["These terms are subject to the mandatory consumer rules that apply to the buyer. Complete the seller details and applicable jurisdiction before publishing this page."],
-            "it": ["Questi termini rispettano le norme inderogabili a tutela del consumatore applicabili all'acquirente. Completa i dati del venditore e la giurisdizione applicabile prima di pubblicare questa pagina."]
+            "en": ["If you have any questions before purchasing the book, please contact us at {{sellerEmail}}. The book is produced in a limited edition; for an order of multiple books, please contact us first to check availability."],
+            "it": ["Per eventuali domande prima dell'acquisto, vi invitiamo a contattarci all'indirizzo {{sellerEmail}}. Il libro è prodotto in edizione limitata; per ordini di più copie, si prega di contattarci preventivamente per verificare la disponibilità."]
           }
         }
       ]

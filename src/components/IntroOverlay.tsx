@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BlackHole from './BlackHole';
 
 type Phase = 'idle' | 'imploding' | 'shrinking' | 'turning_white' | 'exploding' | 'fading_out';
@@ -6,6 +6,13 @@ type Phase = 'idle' | 'imploding' | 'shrinking' | 'turning_white' | 'exploding' 
 export default function IntroOverlay({ onComplete }: { onComplete: () => void }) {
   const [phase, setPhase] = useState<Phase>('idle');
   const [opacity, setOpacity] = useState(1);
+  const completed = useRef(false);
+
+  const complete = () => {
+    if (completed.current) return;
+    completed.current = true;
+    onComplete();
+  };
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -28,7 +35,7 @@ export default function IntroOverlay({ onComplete }: { onComplete: () => void })
     const timer = window.setTimeout(() => {
       if (phase === 'fading_out') {
         setOpacity(0);
-        window.setTimeout(onComplete, short ? 260 : 320);
+        window.setTimeout(complete, short ? 260 : 320);
       } else {
         setPhase(({ imploding: 'shrinking', shrinking: 'turning_white', turning_white: 'exploding', exploding: 'fading_out' } as const)[phase]);
       }

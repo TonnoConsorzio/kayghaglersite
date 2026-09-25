@@ -12,15 +12,17 @@ export default function Hero({ product, loading = false }: { product?: Product; 
   const [imageFailed, setImageFailed] = useState(false);
   if (!product) return <section className={`hero hero-empty ${loading ? 'hero-loading' : ''}`} aria-live="polite"><p>{loading ? (language === 'it' ? 'Caricamento libro…' : 'Loading book…') : (language === 'it' ? 'Nessun libro disponibile.' : 'No book available.')}</p></section>;
   const title = stripHtml(getLocalizedValue(product.title, language));
-  const description = stripHtml(getLocalizedValue(product.description, language));
   const imageUrl = product.images[0];
   const heroCopy = siteConfig.homepage.hero;
+  const description = heroCopy.description[language];
 
   return (
     <section className="hero">
       <div className="hero-copy reveal">
         <h1>{title}</h1>
-        <p className="hero-description">{description}</p>
+        <div className="hero-description">
+          {description.split(/\n\n+/).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </div>
         <Link to={`/product/${product.id}`} className="button button-primary">{heroCopy.button[language]} <ArrowUpRight size={17} aria-hidden="true" /></Link>
       </div>
       <Link to={`/product/${product.id}`} className="hero-image reveal delay-100" aria-label={`${title} — ${heroCopy.button[language]}`}>

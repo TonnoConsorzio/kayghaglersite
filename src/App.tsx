@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import IntroOverlay from './components/IntroOverlay';
 import HomePage from './pages/HomePage';
@@ -15,7 +15,24 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [introComplete, setIntroComplete] = useState(!siteConfig.intro.enabled);
+  const [introComplete, setIntroComplete] = useState(() => {
+    if (!siteConfig.intro.enabled) return true;
+
+    try {
+      return sessionStorage.getItem('kgh-intro-seen') === '1';
+    } catch {
+      return false;
+    }
+  });
+
+  const completeIntro = useCallback(() => {
+    try {
+      sessionStorage.setItem('kgh-intro-seen', '1');
+    } catch {
+      // Storage can be unavailable in private browsing; the intro still completes.
+    }
+    setIntroComplete(true);
+  }, []);
 
   useEffect(() => {
     if (!introComplete) return;
@@ -57,7 +74,7 @@ export default function App() {
       <div className="selection:bg-brand-500 selection:text-white">
         <a className="skip-link" href="#main-content">Skip to content</a>
         {!introComplete && (
-          <IntroOverlay onComplete={() => setIntroComplete(true)} />
+          <IntroOverlay onComplete={completeIntro} />
         )}
         
         <div className={!introComplete ? 'h-screen overflow-hidden' : ''}>
