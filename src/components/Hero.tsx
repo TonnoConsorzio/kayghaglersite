@@ -18,14 +18,14 @@ export default function Hero({ product, loading = false }: { product?: Product; 
 
   return (
     <section className="hero">
-      <div className="hero-copy reveal">
+      <div className="hero-copy">
         <h1>{title}</h1>
         <div className="hero-description">
           {description.split(/\n\n+/).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </div>
         <Link to={`/product/${product.id}`} className="button button-primary">{heroCopy.button[language]} <ArrowUpRight size={17} aria-hidden="true" /></Link>
       </div>
-      <Link to={`/product/${product.id}`} className="hero-image reveal delay-100" aria-label={`${title} — ${heroCopy.button[language]}`}>
+      <Link to={`/product/${product.id}`} className="hero-image" aria-label={`${title} — ${heroCopy.button[language]}`}>
         {imageUrl && !imageFailed ? <LiquidImage src={imageUrl} alt={title} width={1200} height={1400} fetchPriority="high" onError={() => setImageFailed(true)} /> : <div className="product-image-fallback" aria-hidden="true" />}
         <span className="hero-image-label"><ArrowUpRight size={17} aria-hidden="true" /></span>
       </Link>

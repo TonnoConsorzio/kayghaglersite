@@ -15,8 +15,7 @@ export default function Footer() {
           </div>
           <div className="footer-links">
             <a href={`mailto:${siteConfig.footer.contactEmail}`}>{language === 'it' ? 'Contatti' : 'Contact'}</a>
-            <Link to="/privacy">{language === 'it' ? 'Privacy' : 'Privacy policy'}</Link>
-            <Link to="/terms">{language === 'it' ? 'Termini' : 'Terms'}</Link>
+            <Link to="/legal">{language === 'it' ? 'Privacy e termini' : 'Privacy & terms'}</Link>
           </div>
           <button type="button" className="back-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label={language === 'it' ? 'Torna all’inizio' : 'Back to top'}><ArrowUp size={17} aria-hidden="true" /></button>
         </div>

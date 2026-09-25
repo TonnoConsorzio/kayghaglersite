@@ -11,6 +11,10 @@ type LegalDocument = {
   sections: Array<{ heading: LocalizedCopy; paragraphs: Record<'en' | 'it', string[]> }>;
 };
 
+type LegalDocumentPageProps = {
+  documents: LegalDocument[];
+};
+
 function fill(text: string): string {
   const { seller } = siteConfig.legal;
   return text
@@ -19,7 +23,7 @@ function fill(text: string): string {
     .replaceAll('{{sellerEmail}}', seller.email);
 }
 
-export default function LegalDocumentPage({ document }: { document: LegalDocument }) {
+export default function LegalDocumentPage({ documents }: LegalDocumentPageProps) {
   const { language } = useLanguage();
 
   return <div className="page-shell">
@@ -27,11 +31,15 @@ export default function LegalDocumentPage({ document }: { document: LegalDocumen
     <main id="main-content" className="page-content legal-page">
       <Link to="/" className="back-link">{language === 'it' ? 'Torna alla home' : 'Back home'}</Link>
       <article className="legal-document">
-        <h1>{document.title[language]}</h1>
-        <p className="legal-intro">{document.intro[language]}</p>
-        {document.sections.map((section) => <section key={section.heading.en}>
-          <h2>{section.heading[language]}</h2>
-          {section.paragraphs[language].map((paragraph) => <p key={paragraph}>{fill(paragraph)}</p>)}
+        <h1>{language === 'it' ? 'Privacy e termini' : 'Privacy & terms'}</h1>
+        <p className="legal-intro">{language === 'it' ? 'Informativa sulla privacy e condizioni di vendita del sito.' : 'Privacy policy and terms for purchases made through this site.'}</p>
+        {documents.map((document) => <section className="legal-document-block" key={document.title.en}>
+          <h2>{document.title[language]}</h2>
+          <p className="legal-document-intro">{document.intro[language]}</p>
+          {document.sections.map((section) => <section key={section.heading.en}>
+            <h2>{section.heading[language]}</h2>
+            {section.paragraphs[language].map((paragraph) => <p key={paragraph}>{fill(paragraph)}</p>)}
+          </section>)}
         </section>)}
       </article>
     </main>

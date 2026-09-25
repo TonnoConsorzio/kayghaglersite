@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
-import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import IntroOverlay from './components/IntroOverlay';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import LegalDocumentPage from './components/LegalDocument';
 import siteConfig from './config/site.json';
+
+const legalDocuments = [siteConfig.legal.privacy, siteConfig.legal.terms];
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -81,8 +83,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
-            <Route path="/privacy" element={<LegalDocumentPage document={siteConfig.legal.privacy} />} />
-            <Route path="/terms" element={<LegalDocumentPage document={siteConfig.legal.terms} />} />
+            <Route path="/legal" element={<LegalDocumentPage documents={legalDocuments} />} />
+            <Route path="/privacy" element={<Navigate to="/legal" replace />} />
+            <Route path="/terms" element={<Navigate to="/legal" replace />} />
           </Routes>
         </div>
       </div>
