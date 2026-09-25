@@ -59,6 +59,7 @@ export default function ProductPage() {
           </div>
           <div className="product-detail-copy">
             <h1>{title}</h1>
+            <p className="shipping-note">{siteConfig.shipping.note[language]}</p>
             <p className="product-detail-price">{formatPrice(product.price, product.currency, language) || 'Price on request'}</p>
             {richDescription && <div className="product-description" dangerouslySetInnerHTML={{ __html: richDescription }} />}
             {purchaseUrl ? <a href={purchaseUrl} className="button button-primary" target="_blank" rel="noopener noreferrer">{language === 'it' ? 'Vai al pagamento' : 'Go to checkout'} <ArrowUpRight size={17} aria-hidden="true" /></a> : <p className="product-note">{language === 'it' ? 'Acquisto online in arrivo.' : 'Online checkout coming soon.'}</p>}

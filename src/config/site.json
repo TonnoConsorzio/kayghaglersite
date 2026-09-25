@@ -23,6 +23,12 @@
       }
     }
   },
+  "shipping": {
+    "note": {
+      "en": "Shipping is calculated separately based on your residential area.",
+      "it": "La spedizione è a parte e viene calcolata in base alla zona di residenza."
+    }
+  },
   "footer": {
     "contactEmail": "nap.61@hotmail.com",
     "copyright": {
