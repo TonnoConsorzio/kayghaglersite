@@ -82,7 +82,7 @@ function applyOverride(product: Product): Product {
     description: { ...product.description, ...override.description },
     price: override.price ?? product.price,
     compareToPrice: override.compareToPrice ?? product.compareToPrice,
-    currency: override.currency ?? product.currency,
+    currency: config.site.currency,
     images: override.images?.length ? override.images : product.images,
   };
 }
@@ -129,7 +129,7 @@ function normalizeProduct(product: EcwidProduct): Product {
     description: textMap(product.description, product.descriptionTranslated),
     price: product.priceInProductList ?? product.price,
     compareToPrice: product.compareToPrice,
-    currency: product.currency ?? config.site.currency,
+    currency: config.site.currency,
     images,
     category: category?.nameTranslated?.en ?? category?.name,
     url: isSafeProductUrl(product.url ?? product.productUrl),
@@ -148,7 +148,7 @@ function normalizeProduct(product: EcwidProduct): Product {
 function getLocalProducts(): Product[] {
   return Object.values(localModules).map((product) => applyOverride({
     ...(product as unknown as Product),
-    currency: (product.currency as string | undefined) ?? config.site.currency,
+    currency: config.site.currency,
     source: 'local' as const,
   }));
 }

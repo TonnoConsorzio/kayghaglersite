@@ -6,7 +6,7 @@
       "it": "Libri e idee indipendenti per chi continua a guardare più da vicino."
     },
     "logo": "/Logo.svg",
-    "currency": "EUR"
+    "currency": "USD"
   },
   "intro": {
     "enabled": true
@@ -95,43 +95,14 @@
     },
     "terms": {
       "title": {
-        "en": "Terms & conditions",
-        "it": "Termini e condizioni"
+        "en": "TERMS AND CONDITIONS",
+        "it": "TERMINI E CONDIZIONI"
       },
       "intro": {
-        "en": "On this website you have access to information, tools, resources, and products of the book “1162 Round’s to Hell and Back”, subtitle “Without Breath”.",
-        "it": "Su questo sito web è possibile accedere a informazioni, strumenti, risorse e prodotti relativi al libro “1162 Rounds senza respiro (Andata e ritorno all’inferno)”."
+        "en": "On this website you have access to information, tools, resources, and products of the book “1162 Round’s to Hell and Back” Subtitle “Without Breath”. The book and the domain kghteam.com are registered and owned by K.G.H. Copying or duplicating any material or details on the site is strictly prohibited and punishable by law.\n\nThe Trademark is registered and may not be copied or used for any reason whatsoever. Illegal use of the mark is punishable by the law. All content and material displayed regarding the book include, title, subtitle, photo, text, cover, story, are registered and no one is authorized to use without written permission from the owner. Processing orders are handled through ECWID which provides a secure method for you to pay by credit card. If your credit card is declined, please contact your credit card issuer. Personal data will be processed by authorized third parties exclusively to facilitate and complete the payment transaction. We cannot issue a refund for the lost item. All books shipped will be sent by registered mail and we can provide you with a Customs number if you need it so you can track your item. If you have any questions before purchasing the book, please contact us at nap.61@hotmail.com. Shipping costs will be determined automatically during your payment method. The book is produced in a limited edition, for an order of multiple books please contact first to check availability.\n\nThe book features a high-quality hardcover, designed to enhance its presentation and prevent damage during transit. Delivery times depend on the destination, with a maximum of 10 days allowed for potential delays.",
+        "it": "Su questo sito web è possibile accedere a informazioni, strumenti, risorse e prodotti relativi al libro “1162 Rounds senza respiro (Andata e ritorno all’inferno)”. Il libro e il dominio kghteam.com sono registrati e di proprietà di K.G.H. La copia o la duplicazione di qualsiasi materiale o contenuto presente sul sito è severamente vietata e punibile a norma di legge.\n\nIl marchio è registrato e non può essere copiato o utilizzato per alcun motivo. L'uso illecito del marchio è punibile a norma di legge. Tutti i contenuti e i materiali relativi al libro (titolo, sottotitolo, fotografie, testi, copertina, storia) sono registrati; nessuno è autorizzato a utilizzarli senza il consenso scritto del proprietario. L'elaborazione degli ordini avviene tramite ECWID, che offre una modalità sicura per il pagamento con carta di credito. In caso di rifiuto della carta di credito, si prega di contattare l'istituto emittente. I dati personali saranno trattati da terze parti autorizzate esclusivamente per agevolare e completare la transazione di pagamento. Non è possibile emettere rimborsi per articoli smarriti. Tutte le spedizioni vengono effettuate tramite servizio sicuro al fine di garantire integrità e affidabilità del recapito. Su richiesta dell’acquirente, forniamo il numero di tracciamento doganale, utile per verificare in tempo reale lo stato della spedizione lungo l’intero processo logistico. Per eventuali domande prima dell'acquisto, vi invitiamo a contattarci all'indirizzo nap.61@hotmail.com. Le spese di spedizione verranno calcolate automaticamente al momento della scelta del metodo di pagamento. Il libro è prodotto in edizione limitata, per ordini di più copie, si prega di contattarci preventivamente per verificare la disponibilità.\n\nIl libro si presenta con una copertina rigida di alta qualità, progettata per valorizzarne la presentazione e prevenire qualsiasi danneggiamento durante il transito. La consegna del libro dipende dalla destinazione prevedendo un massimo di 10 giorni in caso di ritardo."
       },
-      "sections": [
-        {
-          "heading": { "en": "Ownership and intellectual property", "it": "Proprietà e proprietà intellettuale" },
-          "paragraphs": {
-            "en": ["The book and the domain kghteam.com are registered and owned by K.G.H. Copying or duplicating any material or details on the site is strictly prohibited and punishable by law.", "The trademark is registered and may not be copied or used for any reason whatsoever. Illegal use of the mark is punishable by law. All content and material displayed regarding the book—including the title, subtitle, photos, text, cover and story—are registered, and no one is authorized to use them without written permission from the owner."],
-            "it": ["Il libro e il dominio kghteam.com sono registrati e di proprietà di K.G.H. La copia o la duplicazione di qualsiasi materiale o contenuto presente sul sito è severamente vietata e punibile a norma di legge.", "Il marchio è registrato e non può essere copiato o utilizzato per alcun motivo. L'uso illecito del marchio è punibile a norma di legge. Tutti i contenuti e i materiali relativi al libro—titolo, sottotitolo, fotografie, testi, copertina e storia—sono registrati; nessuno è autorizzato a utilizzarli senza il consenso scritto del proprietario."]
-          }
-        },
-        {
-          "heading": { "en": "Orders and payment", "it": "Ordini e pagamento" },
-          "paragraphs": {
-            "en": ["Orders are processed through Ecwid, which provides a secure method for payment by credit card. If your credit card is declined, please contact your credit card issuer. Personal data will be processed by authorized third parties exclusively to facilitate and complete the payment transaction."],
-            "it": ["L'elaborazione degli ordini avviene tramite Ecwid, che offre una modalità sicura per il pagamento con carta di credito. In caso di rifiuto della carta di credito, si prega di contattare l'istituto emittente. I dati personali saranno trattati da terze parti autorizzate esclusivamente per agevolare e completare la transazione di pagamento."]
-          }
-        },
-        {
-          "heading": { "en": "Shipping and availability", "it": "Spedizione e disponibilità" },
-          "paragraphs": {
-            "en": ["We cannot issue a refund for a lost item. All books shipped will be sent by registered mail, and we can provide a customs number if you need it so you can track your item. Shipping costs will be determined automatically during checkout."],
-            "it": ["Non è possibile emettere rimborsi per articoli smarriti. Tutte le spedizioni vengono effettuate tramite servizio sicuro al fine di garantire integrità e affidabilità del recapito. Su richiesta dell’acquirente, forniamo il numero di tracciamento doganale, utile per verificare in tempo reale lo stato della spedizione. Le spese di spedizione verranno calcolate automaticamente al momento della scelta del metodo di pagamento."]
-          }
-        },
-        {
-          "heading": { "en": "Questions and limited edition", "it": "Domande edizione limitata" },
-          "paragraphs": {
-            "en": ["If you have any questions before purchasing the book, please contact us at {{sellerEmail}}. The book is produced in a limited edition; for an order of multiple books, please contact us first to check availability."],
-            "it": ["Per eventuali domande prima dell'acquisto, vi invitiamo a contattarci all'indirizzo {{sellerEmail}}. Il libro è prodotto in edizione limitata; per ordini di più copie, si prega di contattarci preventivamente per verificare la disponibilità."]
-          }
-        }
-      ]
+      "sections": []
     }
   },
   "ecwid": {

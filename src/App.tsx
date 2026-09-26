@@ -6,7 +6,7 @@ import ProductPage from './pages/ProductPage';
 import LegalDocumentPage from './components/LegalDocument';
 import siteConfig from './config/site.json';
 
-const legalDocuments = [siteConfig.legal.privacy, siteConfig.legal.terms];
+const legalDocuments = [siteConfig.legal.terms];
 
 function ScrollToTop() {
   const { pathname } = useLocation();

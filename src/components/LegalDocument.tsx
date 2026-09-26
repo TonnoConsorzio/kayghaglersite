@@ -31,11 +31,9 @@ export default function LegalDocumentPage({ documents }: LegalDocumentPageProps)
     <main id="main-content" className="page-content legal-page">
       <Link to="/" className="back-link">{language === 'it' ? 'Torna alla home' : 'Back home'}</Link>
       <article className="legal-document">
-        <h1>{language === 'it' ? 'Privacy e termini' : 'Privacy & terms'}</h1>
-        <p className="legal-intro">{language === 'it' ? 'Informativa sulla privacy e condizioni di vendita del sito.' : 'Privacy policy and terms for purchases made through this site.'}</p>
         {documents.map((document) => <section className="legal-document-block" key={document.title.en}>
-          <h2>{document.title[language]}</h2>
-          <p className="legal-document-intro">{document.intro[language]}</p>
+          {documents.length === 1 ? <h1>{document.title[language]}</h1> : <h2>{document.title[language]}</h2>}
+          {document.intro[language].split(/\n\n+/).map((paragraph) => <p className="legal-document-intro" key={paragraph}>{paragraph}</p>)}
           {document.sections.map((section) => <section key={section.heading.en}>
             <h2>{section.heading[language]}</h2>
             {section.paragraphs[language].map((paragraph) => <p key={paragraph}>{fill(paragraph)}</p>)}
